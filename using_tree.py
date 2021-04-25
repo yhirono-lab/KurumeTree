@@ -45,14 +45,6 @@ class UsingTree(object):
             self.pred.append(count)
         self.pred = np.array(self.pred)
         self.pred = self.pred / np.sum(self.pred, 1, keepdims=True)
-    
-    # def test(self, data, label, label_names, annotation, outputdir):
-    #     print(f'test_data:{data.shape}/disease:{label_names.shape}')
-
-    #     self.root.test_split_node(sample=data, target=label, target_names=label_names, annotation=annotation, outputdir=outputdir)
-    #     self.leaf_hist = self.root_analysis.get_leaf_probability(self.root, self.leaf_num, label_names)
-    #     self.predict(data, label, label_names)
-
 
 class TreeAnalysis(object):
     def __init__(self):
@@ -96,7 +88,6 @@ class TreeAnalysis(object):
 
         self.search_leaf(node.left)
         self.search_leaf(node.right)
-    
     
 class Node(object):
     def __init__(self, max_depth=None):
@@ -171,26 +162,6 @@ class Node(object):
         leaf_num = self.right.split_node(sample_r, target_r, depth+1, node_id, leaf_num)
 
         return leaf_num
-    
-    # def test_split_node(self, sample, target, target_names, annotation, outputdir):
-    #     # 全labelの個数をカウント
-    #     self.target_count = np.asarray([len(target[target == i]) for i in range(len(target_names))])
-    #     if self.leaf_id is not None:
-    #         print(self.depth, annotation.shape, np.sum(self.target_count))
-    #         utils.makeCSV2(annotation, f'{outputdir}/unu_depth{self.depth}/leafs', f'leaf{self.leaf_id}.csv')
-    #         utils.makeCSV2(annotation, f'{outputdir}/leafs/depth{self.depth}', f'leaf{self.leaf_id}.csv')
-
-    #     if self.leaf_id is None:
-    #         # 子ノードへ分岐
-    #         sample_l = sample[sample[:, self.feature] == 0]
-    #         target_l = target[sample[:, self.feature] == 0]
-    #         annotation_l = annotation[sample[:, self.feature] == 0]
-    #         self.left.test_split_node(sample_l, target_l, target_names, annotation_l, outputdir)
-
-    #         sample_r = sample[sample[:, self.feature] == 1]
-    #         target_r = target[sample[:, self.feature] == 1]
-    #         annotation_r = annotation[sample[:, self.feature] == 1]
-    #         self.right.test_split_node(sample_r, target_r, target_names, annotation_r, outputdir)
 
     def criterion_func(self, target, classes, weight):
         numdata = len(target)
@@ -203,19 +174,6 @@ class Node(object):
                 p = float(len(target[target == c])) / numdata
                 if p != 0.0:
                     entropy -= p * np.log2(p)
-        
-        # # データ数の正規化有り
-        # if option == 1:    
-        #     target_weight = np.ones(target.shape[0])
-        #     if numdata != 0:
-        #         for i,c in enumerate(classes):
-        #             target_weight[target == c] /= weight[i]
-        #         weight_sum = np.sum(target_weight)
-                
-        #         for c in classes:
-        #             p = float(np.sum(target_weight[target == c])) / weight_sum
-        #             if p != 0.0:
-        #                 entropy -= p * np.log2(p)
             
         return entropy
 
