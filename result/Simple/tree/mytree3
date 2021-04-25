@@ -1,0 +1,64 @@
+digraph {
+	node [fontsize=30 shape=rect]
+	0 [label=MUM1 shape=ellipse]
+	1 [label=CD4 shape=ellipse]
+	2 [label=bcl2 shape=ellipse]
+	3 [label="Meta:26
+Reactive:14
+Other_neoplasm:14
+Others:8
+N/A:5" color=cyan]
+	4 [label="Reactive:70
+IgG4_RD:7
+Castleman:3
+CHL:2
+Other_neoplasm:2" color=cyan]
+	5 [label=EBER shape=ellipse]
+	6 [label="ATLL:21
+PTCL_NOS:6
+Other_neoplasm:2
+Others:1
+MLN_FGFR1:1" color=cyan]
+	7 [label="PTCL_NOS:13
+CHL:7
+Reactive:6
+AITL:4
+BPDCN:3" color=cyan]
+	8 [label="FDC meshwork" shape=ellipse]
+	9 [label="AE1/AE3" shape=ellipse]
+	10 [label="DLBCL:85
+OI_ILPD:11
+Reactive:5
+LG_BCL:4
+FL:4" color=cyan]
+	11 [label="MALT:8
+DLBCL:2
+Reactive:2
+PCM:2
+Meta:2" color=cyan]
+	12 [label=cyclinD1 shape=ellipse]
+	13 [label="FL:74
+DLBCL:12
+OI_ILPD:3
+HG_BCL:1
+Reactive:1" color=cyan]
+	14 [label="FL:18
+LG_BCL:5
+CLL/SLL:4
+MCL:4
+DLBCL:3" color=cyan]
+	0 -> 1 [label="not use"]
+	1 -> 2 [label="not use"]
+	2 -> 3 [label="not use"]
+	2 -> 4 [label=use]
+	1 -> 5 [label=use]
+	5 -> 6 [label="not use"]
+	5 -> 7 [label=use]
+	0 -> 8 [label=use]
+	8 -> 9 [label="not use"]
+	9 -> 10 [label="not use"]
+	9 -> 11 [label=use]
+	8 -> 12 [label=use]
+	12 -> 13 [label="not use"]
+	12 -> 14 [label=use]
+}

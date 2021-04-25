@@ -6,13 +6,12 @@ def ReadOriginalCSV(filename):
     csv_data = open(filename, 'r', newline='', encoding='utf-8')
     reader = csv.reader(csv_data)
     dataset = []
-    simplename_list = []
-    fullname_list = []
+
     for i in range(2):
         next(reader)
     
     for row in reader:
-        header = ['No'] + row[62:86]
+        header = ['No','SimpleName', 'FullName'] + row[62:86]
         break
     
     fix_list = ['＋', '(+,focal)', 'ー', '－', '弱', 'weak', 'ごく少数', '極少数', '少数', '一部', 'N/A', '　']
@@ -34,14 +33,13 @@ def ReadOriginalCSV(filename):
                 print(row[1], i, stain[i], fix_list[j], stain[i] is not fix_list[j])
 
         if row[7] is not '':
-            dataset.append([row[1]] + stain)
-            fullname_list.append(f'{row[6]}-{row[7]}')
+            fullname = f'{row[6]}-{row[7]}'
+            dataset.append([row[1], row[6], fullname] + stain)
         else:
-            dataset.append([row[1]] + stain)
-            fullname_list.append(row[6])
-        simplename_list.append(row[6])
+            fullname = row[6]
+            dataset.append([row[1], row[6], fullname] + stain)
     
-    return np.array([header] + dataset), simplename_list, fullname_list
+    return np.array([header] + dataset)
 
 
 def WriteMultiCSV(data, filename):
@@ -65,30 +63,25 @@ def WriteDicCSV(data, filename):
         writer.writerow(list(d))
     csv_file.close()
 
-def Add_DiseasaeID(dataset, name_list, file_label):
+def Add_Diseasae(dataset, file_label):
+    if file_label == 'SimpleName':
+       dataset = np.delete(dataset, 2, axis=1)
+    if file_label == 'FullName':
+        dataset = np.delete(dataset, 1, axis=1)
+    
+    name_list = dataset[1:,1]
     count_simple = collections.Counter(name_list)
     count_sort = sorted(count_simple.items(), key=lambda x:x[1], reverse=True)
     # WriteDicCSV(count_sort, f'data/Disease_{file_label}_list.csv')
-
-    count_sort = [c[0] for c in count_sort]
-    disease_id_list = []
-    
-    for name in name_list:
-        idx = count_sort.index(name)
-        disease_id_list.append(idx)
-    
-    dataset = np.insert(dataset, 1, ['Disease_ID'] + disease_id_list, axis=1)
-    dataset = np.insert(dataset, 1, ['Disease'] + name_list, axis=1)
-    
     return dataset
 
     
 
-dataset, simplename_list, fullname_list = ReadOriginalCSV('data/ML180001-180660 _to_NIT.csv')
-# WriteSingleCSV(dataset[0][1:], 'data/Stain_list.csv')
+dataset = ReadOriginalCSV('data/ML180001-180660 _to_NIT.csv')
+# WriteSingleCSV(dataset[0][3:], 'data/Stain_list.csv')
 
-dataset_simple = Add_DiseasaeID(dataset, simplename_list, 'SimpleDame')
+dataset_simple = Add_Diseasae(dataset, 'SimpleName')
 # WriteMultiCSV(dataset_simple, 'data/Data_SimpleName.csv')
 
-dataset_full = Add_DiseasaeID(dataset, fullname_list, 'FullDame')
+dataset_full = Add_Diseasae(dataset, 'FullName')
 # WriteMultiCSV(dataset_full, 'data/Data_FullName.csv')

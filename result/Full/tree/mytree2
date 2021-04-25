@@ -1,0 +1,32 @@
+digraph {
+	node [fontsize=30 shape=rect]
+	0 [label=MUM1 shape=ellipse]
+	1 [label=CD4 shape=ellipse]
+	2 [label="Reactive:68
+Reactive-Kikuchi:8
+Meta-SqCC:7
+IgG4_RD:7
+Meta-adenocarcinoma:6" color=cyan]
+	3 [label="ATLL:21
+PTCL_NOS:19
+Reactive:6
+CHL-NS:5
+AITL:4" color=cyan]
+	4 [label="FDC meshwork" shape=ellipse]
+	5 [label="DLBCL-nonGC:48
+DLBCL-GC:31
+DLBCL-CD5+:8
+MALT:8
+OI_ILPD-DLBCL:6" color=cyan]
+	6 [label="FL-G2:29
+FL-G1:29
+FL-G3a:18
+FL-G3b:15
+DLBCL-nonGC:7" color=cyan]
+	0 -> 1 [label="not use"]
+	1 -> 2 [label="not use"]
+	1 -> 3 [label=use]
+	0 -> 4 [label=use]
+	4 -> 5 [label="not use"]
+	4 -> 6 [label=use]
+}

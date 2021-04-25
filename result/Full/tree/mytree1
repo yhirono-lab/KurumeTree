@@ -1,0 +1,16 @@
+digraph {
+	node [fontsize=30 shape=rect]
+	0 [label=MUM1 shape=ellipse]
+	1 [label="Reactive:74
+ATLL:21
+PTCL_NOS:19
+Reactive-Kikuchi:9
+IgG4_RD:8" color=cyan]
+	2 [label="DLBCL-nonGC:55
+DLBCL-GC:38
+FL-G1:30
+FL-G2:29
+FL-G3b:18" color=cyan]
+	0 -> 1 [label="not use"]
+	0 -> 2 [label=use]
+}
