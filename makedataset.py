@@ -70,8 +70,8 @@ def Add_Diseasae(dataset, file_label):
         dataset = np.delete(dataset, 1, axis=1)
     
     name_list = dataset[1:,1]
-    count_simple = collections.Counter(name_list)
-    count_sort = sorted(count_simple.items(), key=lambda x:x[1], reverse=True)
+    count = collections.Counter(name_list)
+    count_sort = sorted(count.items(), key=lambda x:x[1], reverse=True)
     # WriteDicCSV(count_sort, f'data/Disease_{file_label}_list.csv')
     return dataset
 

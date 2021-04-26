@@ -2,6 +2,7 @@ import csv
 import os
 import argparse
 import numpy as np
+import collections
 
 def read_ImgList(filepath):
     csv_data = open(filepath)
@@ -46,26 +47,43 @@ img_list = read_ImgList(imgfile_path)
 leaf_list = read_LeafList(leafdir_path)
 # print(leaf_list[3][:,0])
 
-img_leaf_list = []
-# for leaf in leaf_list:
-#     img_leaf = []
-#     data = leaf[:,0]
-#     print(data)
-#     for img in img_list:
-#         if img in data:
-#             img_leaf.append(img)
-#     img_leaf_list.append(img_leaf)
-
+all_img_list = []
 img_leaf_list = [ [] for i in range(len(leaf_list)+1)]
 for img in img_list:
     flag = True
     for i, leaf in enumerate(leaf_list):
         if img in leaf:
-            img_leaf_list[i].append(img)
+            disease = leaf[leaf[:,0]==img, 1]
+            img_leaf_list[i].append([img, disease[0]])
+            all_img_list.append([img, disease[0]])
             flag = False
     
     if flag == True:
-        img_leaf_list[-1].append(img)
+        img_leaf_list[-1].append([img, 'N/A'])
 
-print(leaf_list[0][:,0])
-print(img_leaf_list[0])
+# print(leaf_list[0][:,0])
+# print(img_leaf_list[0])
+
+count_leaf = 0
+for i, leaf in enumerate(leaf_list):
+    print(f'{i}:{len(leaf)}')
+    count_leaf += len(leaf)
+print(f'total:{count_leaf}')
+
+count_img = 0
+for i, img_leaf in enumerate(img_leaf_list):
+    print(f'{i}:{len(img_leaf)}')
+    count_img += len(img_leaf)
+
+    img_leaf = np.array(img_leaf)
+    count = collections.Counter(img_leaf[:,1])
+    count_sort = sorted(count.items(), key=lambda x:x[1], reverse=True)
+    print(len(count_sort), count_sort)
+
+print(f'total:{count_img}')
+
+print(len(all_img_list))
+all_img_list = np.array(all_img_list)
+count = collections.Counter(all_img_list[:,1])
+count_sort = sorted(count.items(), key=lambda x:x[1], reverse=True)
+print(len(count_sort), count_sort)
