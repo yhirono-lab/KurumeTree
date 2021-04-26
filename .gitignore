@@ -1,5 +1,6 @@
 #private files
-data/
+data/ML*
+data/*.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

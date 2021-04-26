@@ -20,12 +20,12 @@ class UsingTree(object):
         self.max_depth = max_depth
         self.root_analysis = TreeAnalysis()
 
-    def fit(self, data, label, label_names):
+    def fit(self, data, label, label_names, annotation):
         print(f'predict_data:{data.shape}/disease:{label_names.shape}')
 
         node_id = np.zeros(1)
         self.root = Node(self.max_depth)
-        self.leaf_num = self.root.split_node(sample=data, target=label, depth=0, node_id=node_id, leaf_num=0)
+        self.leaf_num = self.root.split_node(sample=data, target=label, depth=0, node_id=node_id, leaf_num=0, annotation=annotation)
         
         feature_importances = self.root_analysis.get_feature_importances(self.root, data.shape[1])
         self.feature_importances = {}
@@ -103,7 +103,7 @@ class Node(object):
         self.num_samples = None
         self.num_classes = None
 
-    def split_node(self, sample, target, depth, node_id, leaf_num):
+    def split_node(self, sample, target, depth, node_id, leaf_num, annotation):
         self.depth = depth
         self.node_id = int(node_id[0])
         self.num_samples = len(target)
@@ -118,6 +118,8 @@ class Node(object):
             self.leaf_id = leaf_num
             leaf_num += 1
             # print(leaf_num, self.target_count)
+            dirpath = f'./result/{args.mode}/unu_depth{self.depth}/leafs_data'
+            utils.save_leaf_data(annotation, dirpath, self.leaf_id)
             return leaf_num
         
         # 設定した深さになったら終了
@@ -125,6 +127,8 @@ class Node(object):
             self.leaf_id = leaf_num
             leaf_num += 1
             # print(leaf_num, self.target_count)
+            dirpath = f'./result/{args.mode}/unu_depth{self.depth}/leafs_data'
+            utils.save_leaf_data(annotation, dirpath, self.leaf_id)
             return leaf_num
         
         # 各要素で分割して獲得情報量の計算、最大値で決定木の分割
@@ -146,6 +150,8 @@ class Node(object):
             self.leaf_id = leaf_num
             leaf_num += 1
             # print(leaf_num, self.target_count)
+            dirpath = f'./result/{args.mode}/unu_depth{self.depth}/leafs_data'
+            utils.save_leaf_data(annotation, dirpath, self.leaf_id)
             return leaf_num
 
         print(self.depth, feature_names[self.feature], self.feature, entropy, entropy - self.info_gain)
@@ -153,13 +159,15 @@ class Node(object):
         # 子ノードへ分岐
         sample_l = sample[sample[:, self.feature] == 0]
         target_l = target[sample[:, self.feature] == 0]
+        annotation_l = annotation[sample[:, self.feature] == 0]
         self.left = Node(self.max_depth)
-        leaf_num = self.left.split_node(sample_l, target_l, depth+1, node_id, leaf_num)
+        leaf_num = self.left.split_node(sample_l, target_l, depth+1, node_id, leaf_num, annotation_l)
 
         sample_r = sample[sample[:, self.feature] == 1]
         target_r = target[sample[:, self.feature] == 1]
+        annotation_r = annotation[sample[:, self.feature] == 1]
         self.right = Node(self.max_depth)
-        leaf_num = self.right.split_node(sample_r, target_r, depth+1, node_id, leaf_num)
+        leaf_num = self.right.split_node(sample_r, target_r, depth+1, node_id, leaf_num, annotation_r)
 
         return leaf_num
 
@@ -211,7 +219,7 @@ if __name__ == "__main__":
     for depth in np.array(range(max_depth))+1:
         
         tree = UsingTree(max_depth=depth)
-        tree.fit(data, label, label_names)
+        tree.fit(data, label, label_names, annotation)
         
         outputdir = f'{output}/unu_depth{depth}'
         utils.makeCSV2(tree.pred, outputdir, 'Ptable_unu.csv')

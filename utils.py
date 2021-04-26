@@ -44,11 +44,19 @@ def readCSV(dirpath, mode):
 
     return np.array(unu_list), np.array(dis_id_list), np.array(stain_list), np.array(dis_list), np.array(dataset)
 
-def makeCSV2(data, dirname, filename):
-    if not os.path.isdir(dirname):
-        os.makedirs(dirname)
-    csv_file = open(f'{dirname}/{filename}', 'w', newline='')
+def makeCSV2(data, dirpath, filename):
+    if not os.path.isdir(dirpath):
+        os.makedirs(dirpath)
+    csv_file = open(f'{dirpath}/{filename}', 'w', newline='')
     writer = csv.writer(csv_file)
     writer.writerows(data)
 
+    csv_file.close()
+
+def save_leaf_data(data, dirpath, leaf_id):
+    if not os.path.isdir(dirpath):
+        os.makedirs(dirpath)
+    csv_file = open(f'{dirpath}/leaf_{leaf_id}.csv', 'w', newline='')
+    writer = csv.writer(csv_file)
+    writer.writerows(data)
     csv_file.close()
