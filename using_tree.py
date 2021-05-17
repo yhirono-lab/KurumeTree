@@ -1,5 +1,6 @@
 import collections
 import csv
+from io import UnsupportedOperation
 import os
 import numpy as np
 import pandas as pd
@@ -176,13 +177,29 @@ class Node(object):
         entropy = 0
         
         # データ数の正規化無し
-        # if option == 0:
-        if numdata != 0:
-            for c in classes:
-                p = float(len(target[target == c])) / numdata
-                if p != 0.0:
-                    entropy -= p * np.log2(p)
-            
+        # データ数の正規化無し
+        if option == 0:
+            if numdata != 0:
+                for c in classes:
+                    p = float(len(target[target == c])) / numdata
+                    # print(c,p)
+                    if p != 0.0:
+                        entropy -= p * np.log2(p)
+        
+        # データ数の正規化有り
+        if option == 1:
+            target_weight = np.ones(target.shape[0])
+            if numdata != 0:
+                for i,c in enumerate(classes):
+                    target_weight[target == c] /= weight[i]
+                weight_sum = np.sum(target_weight)
+                
+                for c in classes:
+                    p = float(np.sum(target_weight[target == c])) / weight_sum
+                    # print(c,p)
+                    if p != 0.0:
+                        entropy -= p * np.log2(p)   
+
         return entropy
 
     def calc_info_gain(self, target_p, target_cl, target_cr):
@@ -208,13 +225,17 @@ class Node(object):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='use/not use による決定木の作成')
     parser.add_argument('--mode', help='choose disease name mode (Simple or Full)', choices=['Simple','Full'], default='Simple')
-    parser.add_argument('--depth', help='input tree depth', default=3, type=int)
+    parser.add_argument('--depth', help='input tree depth', default=1, type=int)
+    parser.add_argument('--weight_option', help='input weight option', default=0, type=int)
     args = parser.parse_args()
+    option_dir_list = ['./result','./result_normalize']
+
+    max_depth = args.depth
+    option = args.weight_option
 
     # 学習データの読み込み
-    output = f'result/{args.mode}/'
+    output = f'{option_dir_list[option]}/{args.mode}/'
     data, label, feature_names, label_names, annotation = utils.readCSV(f'./data', args.mode)
-    max_depth = args.depth
             
     for depth in np.array(range(max_depth))+1:
         
@@ -227,4 +248,4 @@ if __name__ == "__main__":
         utils.makeCSV2(tree.leaf_data, outputdir, 'leaf_list_unu.csv')
         utils.makeCSV2(list(tree.feature_importances.items()), outputdir, 'feature_importance.csv')
  
-        gv.GraphViz(tree, feature_names, depth, f'{output}/tree', label_names)
+        gv.GraphViz(tree, feature_names, label_names, f'{output}/tree', depth)

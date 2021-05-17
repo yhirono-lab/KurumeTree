@@ -6,23 +6,39 @@ digraph {
 Meta:26
 Other_neoplasm:16
 Others:9
-IgG4_RD:7" color=cyan]
+IgG4_RD:7
+N/A:6
+CHL:4
+DLBCL:3
+Castleman:3" color=cyan]
 	3 [label="ATLL:21
 PTCL_NOS:19
 CHL:8
 Reactive:7
-AITL:4" color=cyan]
+AITL:4
+BPDCN:3
+Composite:2
+Other_neoplasm:2
+Meta:2" color=cyan]
 	4 [label="FDC meshwork" shape=ellipse]
 	5 [label="DLBCL:87
 OI_ILPD:11
 MALT:8
 Reactive:7
-LG_BCL:5" color=cyan]
+LG_BCL:5
+BL:5
+THRLBCL:4
+FL:4
+Composite:3" color=cyan]
 	6 [label="FL:92
 DLBCL:15
 LG_BCL:5
 CLL/SLL:4
-MCL:4" color=cyan]
+MCL:4
+Reactive:4
+OI_ILPD:3
+NMZL:2
+MALT:1" color=cyan]
 	0 -> 1 [label="not use"]
 	1 -> 2 [label="not use"]
 	1 -> 3 [label=use]

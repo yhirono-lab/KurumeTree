@@ -14,26 +14,177 @@ import utils
 import GraphViz as gv
 
 class UsingTree(object):
-    def __init__(self, max_depth=None):
-        print('max_depth', max_depth)
+    def __init__(self):
         self.root = None
-        self.max_depth = max_depth
         self.root_analysis = TreeAnalysis()
 
     def fit(self, data, label, label_names, annotation):
         print(f'predict_data:{data.shape}/disease:{label_names.shape}')
 
         node_id = np.zeros(1)
-        self.root = Node(self.max_depth)
-        self.leaf_num = self.root.split_node(sample=data, target=label, depth=0, node_id=node_id, leaf_num=0, annotation=annotation)
+        self.leaf_num = 0
         
-        feature_importances = self.root_analysis.get_feature_importances(self.root, data.shape[1])
-        self.feature_importances = {}
-        for idx, value in enumerate(feature_importances):
-            self.feature_importances[feature_names[idx]] = value
+        # CD30 or EBER or PAX5 use/not use
+        self.root = Node()
+        self.root.data = data
+        self.root.label = label
+        self.root.annotation = annotation
+        self.root.depth = 0
+        self.root.node_id = 0
+        self.root.leaf_id = None
+        self.root.num_samples = len(self.root.label)
+        self.root.num_classes = len(np.unique(self.root.label))
+        self.root.target_count = np.asarray([len(self.root.label[self.root.label == i]) for i in range(len(label_names))])
+        self.root.feature = [7,12,13]
+
+        self.root.left = Node()
+        self.root.edge_left = 'use'
+        self.node1 = self.root.left
+        self.node1.data = self.root.data[
+            (self.root.data[:, 7] == '+') | (self.root.data[:, 7] == '-') |
+            (self.root.data[:, 12] == '+') | (self.root.data[:, 12] == '-') |
+            (self.root.data[:, 13] == '+') | (self.root.data[:, 13] == '-')
+        ]
+        self.node1.label = self.root.label[
+            (self.root.data[:, 7] == '+') | (self.root.data[:, 7] == '-') |
+            (self.root.data[:, 12] == '+') | (self.root.data[:, 12] == '-') |
+            (self.root.data[:, 13] == '+') | (self.root.data[:, 13] == '-')
+        ]
+
+        self.node1.annotation = self.root.annotation[
+            (self.root.data[:, 7] == '+') | (self.root.data[:, 7] == '-') |
+            (self.root.data[:, 12] == '+') | (self.root.data[:, 12] == '-') |
+            (self.root.data[:, 13] == '+') | (self.root.data[:, 13] == '-')
+        ]
+        self.node1.depth = 1
+        self.node1.node_id = 1
+        self.node1.leaf_id = 0
+        self.leaf_num += 1
+        self.node1.num_samples = len(self.node1.label)
+        self.node1.num_classes = len(np.unique(self.node1.label))
+        self.node1.target_count = np.asarray([len(self.node1.label[self.node1.label == i]) for i in range(len(label_names))])
+        print(label_names)
+        print(self.node1.num_samples, self.node1.target_count)
         
-        self.leaf_hist = self.root_analysis.get_leaf_probability(self.root, self.leaf_num, label_names)
-        self.predict(data, label, label_names)
+        self.root.right = Node()
+        self.root.edge_right = 'not use'
+        self.node2 = self.root.right
+        self.node2.data = self.root.data[
+            (self.root.data[:, 7] == '') &
+            (self.root.data[:, 12] == '') &
+            (self.root.data[:, 13] == '')
+        ]
+        self.node2.label = self.root.label[
+            (self.root.data[:, 7] == '') &
+            (self.root.data[:, 12] == '') &
+            (self.root.data[:, 13] == '')
+        ]
+        self.node2.annotation = self.root.annotation[
+            (self.root.data[:, 7] == '') &
+            (self.root.data[:, 12] == '') &
+            (self.root.data[:, 13] == '')
+        ]
+        self.node2.depth = 1
+        self.node2.node_id = 2
+        self.node2.leaf_id = None
+        self.node2.num_samples = len(self.node2.label)
+        self.node2.num_classes = len(np.unique(self.node2.label))
+        self.node2.target_count = np.asarray([len(self.node2.label[self.node2.label == i]) for i in range(len(label_names))])
+        self.node2.feature = [0]
+        print(self.node2.num_samples, self.node2.target_count)
+
+        self.node2.left = Node()
+        self.node2.edge_left = '+'
+        self.node3 = self.node2.left
+        self.node3.data = self.node2.data[
+            (self.node2.data[:, 0] == '+')
+        ]
+        self.node3.label = self.node2.label[
+            (self.node2.data[:, 0] == '+')
+        ]
+        self.node3.annotation = self.node2.annotation[
+            (self.node2.data[:, 0] == '+')
+        ]
+        self.node3.depth = 2
+        self.node3.node_id = 3
+        self.node3.leaf_id = 1
+        self.leaf_num += 1
+        self.node3.num_samples = len(self.node3.label)
+        self.node3.num_classes = len(np.unique(self.node3.label))
+        self.node3.target_count = np.asarray([len(self.node3.label[self.node3.label == i]) for i in range(len(label_names))])
+        print(self.node3.num_samples, self.node3.target_count)
+
+        self.node2.right = Node()
+        self.node2.edge_right = '- or not use'
+        self.node4 = self.node2.right
+        self.node4.data = self.node2.data[
+            (self.node2.data[:, 0] == '-') |
+            (self.node2.data[:, 0] == '')
+        ]
+        self.node4.label = self.node2.label[
+            (self.node2.data[:, 0] == '-') |
+            (self.node2.data[:, 0] == '')
+        ]
+        self.node4.annotation = self.node2.annotation[
+            (self.node2.data[:, 0] == '-') |
+            (self.node2.data[:, 0] == '')
+        ]
+        self.node4.depth = 2
+        self.node4.node_id = 4
+        self.node4.leaf_id = None
+        self.node4.num_samples = len(self.node4.label)
+        self.node4.num_classes = len(np.unique(self.node4.label))
+        self.node4.target_count = np.asarray([len(self.node4.label[self.node4.label == i]) for i in range(len(label_names))])
+        self.node4.feature = [6]
+        print(self.node4.num_samples, self.node4.target_count)
+
+        self.node4.left = Node()
+        self.node4.edge_left = '+'
+        self.node5 = self.node4.left
+        self.node5.data = self.node4.data[
+            (self.node4.data[:, 6] == '+')
+        ]
+        self.node5.label = self.node4.label[
+            (self.node4.data[:, 6] == '+')
+        ]
+        self.node5.annotation = self.node4.annotation[
+            (self.node4.data[:, 6] == '+')
+        ]
+        self.node5.depth = 3
+        self.node5.node_id = 5
+        self.node5.leaf_id = 2
+        self.leaf_num += 1
+        self.node5.num_samples = len(self.node5.label)
+        self.node5.num_classes = len(np.unique(self.node5.label))
+        self.node5.target_count = np.asarray([len(self.node5.label[self.node5.label == i]) for i in range(len(label_names))])
+        print(self.node5.num_samples, self.node5.target_count)
+
+        self.node4.right = Node()
+        self.node4.edge_right = '- or not use'
+        self.node6 = self.node4.right
+        self.node6.data = self.node4.data[
+            (self.node4.data[:, 6] == '-') |
+            (self.node4.data[:, 6] == '')
+        ]
+        self.node6.label = self.node4.label[
+            (self.node4.data[:, 6] == '-') |
+            (self.node4.data[:, 6] == '')
+        ]
+        self.node6.annotation = self.node4.annotation[
+            (self.node4.data[:, 6] == '-') |
+            (self.node4.data[:, 6] == '')
+        ]
+        self.node6.depth = 3
+        self.node6.node_id = 6
+        self.node6.leaf_id = 3
+        self.leaf_num += 1
+        self.node6.num_samples = len(self.node6.label)
+        self.node6.num_classes = len(np.unique(self.node6.label))
+        self.node6.target_count = np.asarray([len(self.node6.label[self.node6.label == i]) for i in range(len(label_names))])
+        print(self.node6.num_samples, self.node6.target_count)
+
+        # self.leaf_hist = self.root_analysis.get_leaf_probability(self.root, self.leaf_num, label_names)
+        # self.predict(data, label, label_names)
 
     def predict(self, data, label, label_names):
         # 入力データが到達した葉と確率の計算
@@ -51,31 +202,10 @@ class TreeAnalysis(object):
         self.importances = None
         self.probabilities = None
 
-    def get_feature_importances(self, node, num_features, normalize=True):
-        self.importances = np.zeros(num_features)
-
-        self.compute_feature_importances(node)
-        self.importances /=  node.num_samples
-
-        if normalize:
-            normalizer = np.sum(self.importances)
-            if normalizer > 0.0:
-                self.importances /= normalizer
-
-        return self.importances
-    
-    def compute_feature_importances(self, node):
-        if node.leaf_id is not None:
-            return
-
-        self.importances[node.feature] += node.info_gain * node.num_samples
-
-        self.compute_feature_importances(node.left)
-        self.compute_feature_importances(node.right)
-
     def get_leaf_probability(self, node, leaf_num, label_names):
         self.probabilities = np.zeros((leaf_num, len(label_names)))
         self.search_leaf(node)
+        print(self.probabilities)
         self.probabilities = self.probabilities / np.sum(self.probabilities, 1, keepdims=True)
 
         return self.probabilities
@@ -90,8 +220,7 @@ class TreeAnalysis(object):
         self.search_leaf(node.right)
 
 class Node(object):
-    def __init__(self, max_depth=None):
-        self.max_depth = max_depth
+    def __init__(self):
         self.depth = None
         self.node_id = None
         self.leaf_id = None
@@ -115,15 +244,6 @@ class Node(object):
 
         # targetが1種類になったら終了
         if len(np.unique(target)) == 1:
-            self.leaf_id = leaf_num
-            leaf_num += 1
-            # print(leaf_num, self.target_count)
-            dirpath = f'./result/{args.mode}/unu_depth{self.depth}/leafs_data'
-            utils.save_leaf_data(annotation, dirpath, self.leaf_id)
-            return leaf_num
-        
-        # 設定した深さになったら終了
-        if depth == self.max_depth:
             self.leaf_id = leaf_num
             leaf_num += 1
             # print(leaf_num, self.target_count)
@@ -160,13 +280,13 @@ class Node(object):
         sample_l = sample[sample[:, self.feature] == 0]
         target_l = target[sample[:, self.feature] == 0]
         annotation_l = annotation[sample[:, self.feature] == 0]
-        self.left = Node(self.max_depth)
+        self.left = Node()
         leaf_num = self.left.split_node(sample_l, target_l, depth+1, node_id, leaf_num, annotation_l)
 
         sample_r = sample[sample[:, self.feature] == 1]
         target_r = target[sample[:, self.feature] == 1]
         annotation_r = annotation[sample[:, self.feature] == 1]
-        self.right = Node(self.max_depth)
+        self.right = Node()
         leaf_num = self.right.split_node(sample_r, target_r, depth+1, node_id, leaf_num, annotation_r)
 
         return leaf_num
@@ -212,9 +332,10 @@ if __name__ == '__main__':
 
     # 学習データの読み込み
     output = f'result_teacher/{args.mode}/'
-    data, label, feature_names, label_names, annotation = utils.readCSV(f'./data', args.mode)
+    data, label, feature_names, label_names, annotation = utils.readCSV(f'./data', args.mode, unu_flag=False)
+    print(data.shape)
     
     tree = UsingTree()
     tree.fit(data, label, label_names, annotation)
 
-    gv.GraphViz(tree, feature_names, depth, f'{output}/tree', label_names)
+    gv.GraphViz_teacher(tree, feature_names, label_names, f'{output}/tree')

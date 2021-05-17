@@ -1,0 +1,153 @@
+digraph {
+	node [fontsize=30 shape=rect]
+	0 [label=MUM1 shape=ellipse]
+	1 [label=bcl2 shape=ellipse]
+	2 [label=CD4 shape=ellipse]
+	3 [label="AE1/AE3" shape=ellipse]
+	4 [label="Reactive:13
+Others:7
+Other_neoplasm:7
+Meta:6
+N/A:4
+DLBCL:3
+OI_ILPD:2
+PCM:2
+CHL:2" color=cyan]
+	5 [label="Meta:20
+Other_neoplasm:7
+Others:1
+Reactive:1
+N/A:1" color=cyan]
+	6 [label=EBER shape=ellipse]
+	7 [label="ATLL:21
+PTCL_NOS:6
+Other_neoplasm:2
+Others:1
+MLN_FGFR1:1
+MF:1
+HS:1
+CHL:1" color=cyan]
+	8 [label="PTCL_NOS:12
+CHL:7
+Reactive:6
+AITL:4
+BPDCN:3
+Composite:2
+Meta:2
+MF:1
+OI_ILPD:1" color=cyan]
+	9 [label=EBER shape=ellipse]
+	10 [label=CD5 shape=ellipse]
+	11 [label="Reactive:38
+IgG4_RD:7
+Other_neoplasm:2
+N/A:1
+Castleman:1" color=cyan]
+	12 [label="T_LBL:1
+LG_BCL:1
+FL:1" color=cyan]
+	13 [label=CD30 shape=ellipse]
+	14 [label="Reactive:29
+Castleman:2
+Others:1
+EBV_LPD:1
+AML:1
+IgG4_RD:1" color=cyan]
+	15 [label="Reactive:4
+CHL:2
+THRLBCL:1
+PTCL_NOS:1" color=cyan]
+	16 [label=EBER shape=ellipse]
+	17 [label=CD5 shape=ellipse]
+	18 [label="FDC meshwork" shape=ellipse]
+	19 [label="DLBCL:22
+MALT:6
+Reactive:2
+OI_ILPD:1
+NMZL:1
+DLBCL_CNS:1
+Meta:1" color=cyan]
+	20 [label="FL:61
+DLBCL:9
+HG_BCL:1
+MALT:1" color=cyan]
+	21 [label=CD79a shape=ellipse]
+	22 [label="FL:10
+DLBCL:7
+CLL/SLL:6
+MCL:5
+LG_BCL:5
+Reactive:3
+LPL:2
+NMZL:2" color=cyan]
+	23 [label="DLBCL:3
+FL:2
+BCL_NOS:1
+LG_BCL:1
+BL:1" color=cyan]
+	24 [label=CD30 shape=ellipse]
+	25 [label=CD5 shape=ellipse]
+	26 [label="DLBCL:48
+FL:15
+BL:4
+Reactive:2
+HG_BCL:2
+EBV_DLBCL:1
+OI_ILPD:1
+DLBCL_CNS:1
+Composite:1" color=cyan]
+	27 [label="DLBCL:10
+FL:6
+LG_BCL:3
+OI_ILPD:2
+MALT:2
+PCM:1
+Reactive:1
+MCL:1
+Composite:1" color=cyan]
+	28 [label=CD79a shape=ellipse]
+	29 [label="OI_ILPD:6
+THRLBCL:4
+Reactive:2
+FL:2
+PTLD:1
+Composite:1" color=cyan]
+	30 [label="OI_ILPD:4
+DLBCL:3
+EBV_LPD:1
+CHL:1
+Reactive:1
+BCL_NOS:1
+Composite:1
+PCM:1" color=cyan]
+	0 -> 1 [label="not use"]
+	1 -> 2 [label="not use"]
+	2 -> 3 [label="not use"]
+	3 -> 4 [label="not use"]
+	3 -> 5 [label=use]
+	2 -> 6 [label=use]
+	6 -> 7 [label="not use"]
+	6 -> 8 [label=use]
+	1 -> 9 [label=use]
+	9 -> 10 [label="not use"]
+	10 -> 11 [label="not use"]
+	10 -> 12 [label=use]
+	9 -> 13 [label=use]
+	13 -> 14 [label="not use"]
+	13 -> 15 [label=use]
+	0 -> 16 [label=use]
+	16 -> 17 [label="not use"]
+	17 -> 18 [label="not use"]
+	18 -> 19 [label="not use"]
+	18 -> 20 [label=use]
+	17 -> 21 [label=use]
+	21 -> 22 [label="not use"]
+	21 -> 23 [label=use]
+	16 -> 24 [label=use]
+	24 -> 25 [label="not use"]
+	25 -> 26 [label="not use"]
+	25 -> 27 [label=use]
+	24 -> 28 [label=use]
+	28 -> 29 [label="not use"]
+	28 -> 30 [label=use]
+}

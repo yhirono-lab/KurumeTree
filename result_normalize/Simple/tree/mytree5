@@ -1,0 +1,229 @@
+digraph {
+	node [fontsize=30 shape=rect]
+	0 [label=MUM1 shape=ellipse]
+	1 [label=bcl2 shape=ellipse]
+	2 [label=CD4 shape=ellipse]
+	3 [label="AE1/AE3" shape=ellipse]
+	4 [label=CD15 shape=ellipse]
+	5 [label="Reactive:11
+Other_neoplasm:7
+Others:6
+Meta:6
+N/A:3
+DLBCL:3
+PCM:2
+MPN:1" color=cyan]
+	6 [label="OI_ILPD:2
+Reactive:2
+CHL:2
+Others:1
+N/A:1" color=cyan]
+	7 [label=CD30 shape=ellipse]
+	8 [label="Meta:15
+Other_neoplasm:7
+N/A:1
+Reactive:1" color=cyan]
+	9 [label="Meta:5
+Others:1" color=cyan]
+	10 [label=EBER shape=ellipse]
+	11 [label="AE1/AE3" shape=ellipse]
+	12 [label="ATLL:21
+PTCL_NOS:6
+MLN_FGFR1:1
+CHL:1
+MF:1" color=cyan]
+	13 [label="Other_neoplasm:2
+HS:1
+Others:1" color=cyan]
+	14 [label=bcl6 shape=ellipse]
+	15 [label="CHL:7
+BPDCN:3
+Reactive:3
+PTCL_NOS:3
+Meta:2
+MF:1
+T_PLL:1
+PCM:1
+ITLPD_GI:1" color=cyan]
+	16 [label="PTCL_NOS:9
+AITL:4
+Reactive:3
+Composite:1" color=cyan]
+	17 [label=EBER shape=ellipse]
+	18 [label=CD5 shape=ellipse]
+	19 [label=kappa shape=ellipse]
+	20 [label="Reactive:37
+IgG4_RD:2
+Other_neoplasm:2
+N/A:1" color=cyan]
+	21 [label="IgG4_RD:5
+Reactive:1
+Castleman:1" color=cyan]
+	22 [label=CD10 shape=ellipse]
+	23 [label="T_LBL:1" color=cyan]
+	24 [label="LG_BCL:1
+FL:1" color=cyan]
+	25 [label=CD30 shape=ellipse]
+	26 [label="AE1/AE3" shape=ellipse]
+	27 [label="Reactive:28
+Castleman:2
+Others:1
+EBV_LPD:1
+AML:1" color=cyan]
+	28 [label="Reactive:1
+IgG4_RD:1" color=cyan]
+	29 [label=CD4 shape=ellipse]
+	30 [label="Reactive:4
+CHL:2" color=cyan]
+	31 [label="THRLBCL:1
+PTCL_NOS:1" color=cyan]
+	32 [label=EBER shape=ellipse]
+	33 [label=CD5 shape=ellipse]
+	34 [label="FDC meshwork" shape=ellipse]
+	35 [label="AE1/AE3" shape=ellipse]
+	36 [label="DLBCL:22
+DLBCL_CNS:1
+OI_ILPD:1
+Reactive:1" color=cyan]
+	37 [label="MALT:6
+NMZL:1
+Reactive:1
+Meta:1" color=cyan]
+	38 [label=CD3 shape=ellipse]
+	39 [label="FL:20
+DLBCL:3
+HG_BCL:1
+MALT:1" color=cyan]
+	40 [label="FL:41
+DLBCL:6" color=cyan]
+	41 [label=CD79a shape=ellipse]
+	42 [label=IRTA1 shape=ellipse]
+	43 [label="FL:9
+DLBCL:7
+CLL/SLL:4
+MCL:3
+Reactive:3
+LG_BCL:3
+NMZL:1" color=cyan]
+	44 [label="CLL/SLL:2
+MCL:2
+LG_BCL:2
+LPL:2
+NMZL:1
+FL:1" color=cyan]
+	45 [label="FDC meshwork" shape=ellipse]
+	46 [label="LG_BCL:1
+BCL_NOS:1
+DLBCL:1
+BL:1" color=cyan]
+	47 [label="DLBCL:2
+FL:2" color=cyan]
+	48 [label=CD30 shape=ellipse]
+	49 [label=CD5 shape=ellipse]
+	50 [label=CD3 shape=ellipse]
+	51 [label="DLBCL:9
+BL:4
+FL:3
+HG_BCL:2
+LG_BCL:1
+EBV_DLBCL:1" color=cyan]
+	52 [label="DLBCL:39
+FL:12
+Reactive:2
+OI_ILPD:1
+Composite:1
+DLBCL_CNS:1" color=cyan]
+	53 [label=cyclinD1 shape=ellipse]
+	54 [label="DLBCL:5
+OI_ILPD:2
+FL:2
+Reactive:1
+PCM:1
+Meta:1" color=cyan]
+	55 [label="DLBCL:5
+FL:4
+LG_BCL:3
+MALT:2
+MCL:1
+Composite:1" color=cyan]
+	56 [label=CD79a shape=ellipse]
+	57 [label=EBNA2 shape=ellipse]
+	58 [label="THRLBCL:4
+OI_ILPD:2
+Reactive:2
+FL:2
+PTLD:1
+Composite:1" color=cyan]
+	59 [label="OI_ILPD:4" color=cyan]
+	60 [label=granzymeB shape=ellipse]
+	61 [label="OI_ILPD:4
+DLBCL:3
+EBV_LPD:1
+CHL:1
+PCM:1" color=cyan]
+	62 [label="BCL_NOS:1
+Reactive:1
+Composite:1" color=cyan]
+	0 -> 1 [label="not use"]
+	1 -> 2 [label="not use"]
+	2 -> 3 [label="not use"]
+	3 -> 4 [label="not use"]
+	4 -> 5 [label="not use"]
+	4 -> 6 [label=use]
+	3 -> 7 [label=use]
+	7 -> 8 [label="not use"]
+	7 -> 9 [label=use]
+	2 -> 10 [label=use]
+	10 -> 11 [label="not use"]
+	11 -> 12 [label="not use"]
+	11 -> 13 [label=use]
+	10 -> 14 [label=use]
+	14 -> 15 [label="not use"]
+	14 -> 16 [label=use]
+	1 -> 17 [label=use]
+	17 -> 18 [label="not use"]
+	18 -> 19 [label="not use"]
+	19 -> 20 [label="not use"]
+	19 -> 21 [label=use]
+	18 -> 22 [label=use]
+	22 -> 23 [label="not use"]
+	22 -> 24 [label=use]
+	17 -> 25 [label=use]
+	25 -> 26 [label="not use"]
+	26 -> 27 [label="not use"]
+	26 -> 28 [label=use]
+	25 -> 29 [label=use]
+	29 -> 30 [label="not use"]
+	29 -> 31 [label=use]
+	0 -> 32 [label=use]
+	32 -> 33 [label="not use"]
+	33 -> 34 [label="not use"]
+	34 -> 35 [label="not use"]
+	35 -> 36 [label="not use"]
+	35 -> 37 [label=use]
+	34 -> 38 [label=use]
+	38 -> 39 [label="not use"]
+	38 -> 40 [label=use]
+	33 -> 41 [label=use]
+	41 -> 42 [label="not use"]
+	42 -> 43 [label="not use"]
+	42 -> 44 [label=use]
+	41 -> 45 [label=use]
+	45 -> 46 [label="not use"]
+	45 -> 47 [label=use]
+	32 -> 48 [label=use]
+	48 -> 49 [label="not use"]
+	49 -> 50 [label="not use"]
+	50 -> 51 [label="not use"]
+	50 -> 52 [label=use]
+	49 -> 53 [label=use]
+	53 -> 54 [label="not use"]
+	53 -> 55 [label=use]
+	48 -> 56 [label=use]
+	56 -> 57 [label="not use"]
+	57 -> 58 [label="not use"]
+	57 -> 59 [label=use]
+	56 -> 60 [label=use]
+	60 -> 61 [label="not use"]
+	60 -> 62 [label=use]
+}

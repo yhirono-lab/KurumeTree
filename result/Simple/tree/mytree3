@@ -7,46 +7,75 @@ digraph {
 Reactive:14
 Other_neoplasm:14
 Others:8
-N/A:5" color=cyan]
+N/A:5
+DLBCL:3
+OI_ILPD:2
+PCM:2
+CHL:2" color=cyan]
 	4 [label="Reactive:70
 IgG4_RD:7
 Castleman:3
 CHL:2
-Other_neoplasm:2" color=cyan]
+Other_neoplasm:2
+Others:1
+EBV_LPD:1
+AML:1
+LG_BCL:1" color=cyan]
 	5 [label=EBER shape=ellipse]
 	6 [label="ATLL:21
 PTCL_NOS:6
 Other_neoplasm:2
 Others:1
-MLN_FGFR1:1" color=cyan]
+MLN_FGFR1:1
+HS:1
+IgG4_RD:1
+MF:1
+Reactive:1" color=cyan]
 	7 [label="PTCL_NOS:13
 CHL:7
 Reactive:6
 AITL:4
-BPDCN:3" color=cyan]
+BPDCN:3
+Composite:2
+Meta:2
+MF:1
+T_PLL:1" color=cyan]
 	8 [label="FDC meshwork" shape=ellipse]
 	9 [label="AE1/AE3" shape=ellipse]
 	10 [label="DLBCL:85
 OI_ILPD:11
 Reactive:5
 LG_BCL:4
-FL:4" color=cyan]
+FL:4
+THRLBCL:4
+BL:4
+Composite:3
+CLL/SLL:2" color=cyan]
 	11 [label="MALT:8
 DLBCL:2
 Reactive:2
 PCM:2
-Meta:2" color=cyan]
+Meta:2
+BL:1
+NMZL:1
+LG_BCL:1" color=cyan]
 	12 [label=cyclinD1 shape=ellipse]
 	13 [label="FL:74
 DLBCL:12
 OI_ILPD:3
 HG_BCL:1
-Reactive:1" color=cyan]
+Reactive:1
+BCL_NOS:1
+MALT:1" color=cyan]
 	14 [label="FL:18
 LG_BCL:5
 CLL/SLL:4
 MCL:4
-DLBCL:3" color=cyan]
+DLBCL:3
+Reactive:3
+NMZL:2
+Composite:1
+LPL:1" color=cyan]
 	0 -> 1 [label="not use"]
 	1 -> 2 [label="not use"]
 	2 -> 3 [label="not use"]

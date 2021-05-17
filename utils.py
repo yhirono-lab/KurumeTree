@@ -8,7 +8,7 @@ def pm2unu(s):
     else:
         return 1
 
-def readCSV(dirpath, mode):
+def readCSV(dirpath, mode, unu_flag=True):
     # 免疫染色のリスト mensen_list
     # 病名のリスト dis_list
     # 症例データ dlist
@@ -35,7 +35,10 @@ def readCSV(dirpath, mode):
         idx = dis_list.index(row[1])
         dis_id_list.extend([idx])
 
-        unu = [pm2unu(r) for r in row[2:]]
+        if unu_flag:
+            unu = [pm2unu(r) for r in row[2:]]
+        else:
+            unu = row[2:]
         unu_list.append(unu)
 
         dataset.append(row)
