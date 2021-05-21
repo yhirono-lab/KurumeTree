@@ -4,42 +4,46 @@ digraph {
 PAX5
 EBER
 " shape=ellipse]
-	1 [label="DLBCL:62
-Reactive:50
-FL:23
-ATLL:20
-PTCL_NOS:19
-OI_ILPD:16
-CHL:13
-Meta:9
-Composite:6" color=cyan]
+	1 [label="CHL:11
+OI_ILPD:10
+Reactive:6
+THRLBCL:5
+PTCL_NOS:4
+DLBCL:2
+BPDCN:1
+AITL:1
+ALCL_ALKpos:1" color=cyan]
 	2 [label=CD3
  shape=ellipse]
-	3 [label="Reactive:5
+	3 [label="ATLL:20
+PTCL_NOS:15
+Reactive:9
+AITL:3
+MF:2
+Composite:2
+Other_neoplasm:2
 Others:1
-Other_neoplasm:1
-IgG4_RD:1
-T_LBL:1" color=cyan]
+T_PLL:1" color=cyan]
 	4 [label=CD20
  shape=ellipse]
-	5 [label="FL:72
-DLBCL:43
-Reactive:27
-MALT:7
-LG_BCL:7
+	5 [label="DLBCL:102
+FL:93
+Reactive:53
+LG_BCL:11
+MALT:9
 CLL/SLL:6
-MCL:5
-IgG4_RD:4
-NMZL:3" color=cyan]
-	6 [label="Meta:21
-Reactive:20
-Other_neoplasm:15
-Others:5
-PCM:2
+IgG4_RD:6
+MCL:6
+BL:4" color=cyan]
+	6 [label="Reactive:34
+Meta:29
+Other_neoplasm:16
+Others:8
+PCM:5
+N/A:3
+BPDCN:2
 FL:2
-IgG4_RD:1
-MPN:1
-N/A:1" color=cyan]
+OI_ILPD:2" color=cyan]
 	0 -> 1 [label=use]
 	0 -> 2 [label="not use"]
 	2 -> 3 [label="+"]

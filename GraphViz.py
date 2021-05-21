@@ -3,12 +3,13 @@ import numpy as np
 import os
 
 class GraphViz(object):
-    def __init__(self, tree, feature_names, search, dirname, depth=None):
+    def __init__(self, tree, feature_names, search, dirname, depth=None, option=None):
         self.feature_names = feature_names
         self.depth = depth
         self.dirname = dirname
         self.tree = tree
         self.search = search
+        self.option = option
         
         self.makeGraph()
         
@@ -23,7 +24,11 @@ class GraphViz(object):
         self.makeGraph_add_Node(G, n)
         self.makeGraph_add_edge(G, n)
 
-        G.render(f'{self.dirname}/mytree{self.depth}')
+        if self.option is 0:
+            G.render(f'{self.dirname}/mytree{self.depth}')
+        else:
+            G.render(f'{self.dirname}/mytree{self.depth}_normalize')
+
 
 
     def makeGraph_add_Node(self, G, n):

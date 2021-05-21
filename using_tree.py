@@ -225,7 +225,7 @@ class Node(object):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='use/not use による決定木の作成')
     parser.add_argument('--mode', help='choose disease name mode (Simple or Full)', choices=['Simple','Full'], default='Simple')
-    parser.add_argument('--depth', help='input tree depth', default=1, type=int)
+    parser.add_argument('--depth', help='input tree depth', default=5, type=int)
     parser.add_argument('--weight_option', help='input weight option', default=0, type=int)
     args = parser.parse_args()
     option_dir_list = ['./result','./result_normalize']
@@ -248,4 +248,4 @@ if __name__ == "__main__":
         utils.makeCSV2(tree.leaf_data, outputdir, 'leaf_list_unu.csv')
         utils.makeCSV2(list(tree.feature_importances.items()), outputdir, 'feature_importance.csv')
  
-        gv.GraphViz(tree, feature_names, label_names, f'{output}/tree', depth)
+        gv.GraphViz(tree, feature_names, label_names, f'{output}/tree', depth, option)

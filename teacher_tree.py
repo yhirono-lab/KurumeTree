@@ -41,20 +41,20 @@ class UsingTree(object):
         self.root.edge_left = 'use'
         self.node1 = self.root.left
         self.node1.data = self.root.data[
-            (self.root.data[:, 7] == '+') | (self.root.data[:, 7] == '-') |
-            (self.root.data[:, 12] == '+') | (self.root.data[:, 12] == '-') |
-            (self.root.data[:, 13] == '+') | (self.root.data[:, 13] == '-')
+            ((self.root.data[:, 7] == '+') | (self.root.data[:, 7] == '-')) &
+            ((self.root.data[:, 12] == '+') | (self.root.data[:, 12] == '-')) &
+            ((self.root.data[:, 13] == '+') | (self.root.data[:, 13] == '-'))
         ]
         self.node1.label = self.root.label[
-            (self.root.data[:, 7] == '+') | (self.root.data[:, 7] == '-') |
-            (self.root.data[:, 12] == '+') | (self.root.data[:, 12] == '-') |
-            (self.root.data[:, 13] == '+') | (self.root.data[:, 13] == '-')
+            ((self.root.data[:, 7] == '+') | (self.root.data[:, 7] == '-')) &
+            ((self.root.data[:, 12] == '+') | (self.root.data[:, 12] == '-')) &
+            ((self.root.data[:, 13] == '+') | (self.root.data[:, 13] == '-'))
         ]
 
         self.node1.annotation = self.root.annotation[
-            (self.root.data[:, 7] == '+') | (self.root.data[:, 7] == '-') |
-            (self.root.data[:, 12] == '+') | (self.root.data[:, 12] == '-') |
-            (self.root.data[:, 13] == '+') | (self.root.data[:, 13] == '-')
+            ((self.root.data[:, 7] == '+') | (self.root.data[:, 7] == '-')) &
+            ((self.root.data[:, 12] == '+') | (self.root.data[:, 12] == '-')) &
+            ((self.root.data[:, 13] == '+') | (self.root.data[:, 13] == '-'))
         ]
         self.node1.depth = 1
         self.node1.node_id = 1
@@ -70,18 +70,18 @@ class UsingTree(object):
         self.root.edge_right = 'not use'
         self.node2 = self.root.right
         self.node2.data = self.root.data[
-            (self.root.data[:, 7] == '') &
-            (self.root.data[:, 12] == '') &
+            (self.root.data[:, 7] == '') |
+            (self.root.data[:, 12] == '') |
             (self.root.data[:, 13] == '')
         ]
         self.node2.label = self.root.label[
-            (self.root.data[:, 7] == '') &
-            (self.root.data[:, 12] == '') &
+            (self.root.data[:, 7] == '') |
+            (self.root.data[:, 12] == '') |
             (self.root.data[:, 13] == '')
         ]
         self.node2.annotation = self.root.annotation[
-            (self.root.data[:, 7] == '') &
-            (self.root.data[:, 12] == '') &
+            (self.root.data[:, 7] == '') |
+            (self.root.data[:, 12] == '') |
             (self.root.data[:, 13] == '')
         ]
         self.node2.depth = 1
