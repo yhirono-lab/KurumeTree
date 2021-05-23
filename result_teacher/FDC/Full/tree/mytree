@@ -1,0 +1,81 @@
+digraph {
+	node [fontsize=18 shape=rect]
+	0 [label="CD15
+CD30
+PAX5
+EBER
+" shape=ellipse]
+	1 [label="CHL-NS:7
+Reactive:6
+THRLBCL:5
+CHL-MC:4
+PTCL_NOS:3
+OI_ILPD-DLBCL:3
+total:40/types:16" color=cyan]
+	2 [label="Reactive:64
+DLBCL-nonGC:42
+FL-G1:29
+DLBCL-GC:27
+FL-G2:27
+ATLL:20
+total:392/types:64" color=cyan]
+	3 [label=CD3
+ shape=ellipse]
+	4 [label="ATLL:19
+PTCL_NOS:14
+Reactive:4
+AITL:3
+MLN_FGFR1:1
+T_LBL:1
+total:49/types:13" color=cyan]
+	5 [label="Reactive:60
+DLBCL-nonGC:42
+FL-G1:29
+FL-G2:27
+DLBCL-GC:27
+FL-G3a:17
+total:343/types:58" color=cyan]
+	6 [label=CD20
+ shape=ellipse]
+	8 [label="Reactive:43
+DLBCL-nonGC:42
+FL-G1:28
+DLBCL-GC:27
+FL-G2:27
+FL-G3a:17
+total:259/types:32" color=cyan]
+	9 [label="FDC meshwork
+" shape=ellipse]
+	11 [label="FL-G1:27
+FL-G2:25
+FL-G3a:17
+FL-G3b:11
+LG_BCL:4
+Reactive:2
+total:92/types:11" color=cyan]
+	10 [label="Reactive:41
+DLBCL-nonGC:41
+DLBCL-GC:27
+FL-G3b:5
+CLL/SLL:5
+MCL:5
+total:167/types:31" color=cyan]
+	7 [label="Reactive:17
+Reactive-Kikuchi:8
+Meta-carcinoma:8
+Meta-SqCC:6
+Meta-adenocarcinoma:5
+Reactive-sarcoidosis:4
+total:84/types:33" color=cyan]
+	0 -> 1 [label=use]
+	0 -> 2 [label="not use"]
+	2 -> 3 [label=""]
+	3 -> 4 [label="+"]
+	3 -> 5 [label="- or not use"]
+	5 -> 6 [label=""]
+	6 -> 8 [label="+"]
+	8 -> 9 [label=""]
+	9 -> 11 [label="+"]
+	9 -> 10 [label="- or not use"]
+	6 -> 7 [label="- or not use"]
+}

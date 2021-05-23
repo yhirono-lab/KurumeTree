@@ -47,6 +47,50 @@ def readCSV(dirpath, mode, unu_flag=True):
 
     return np.array(unu_list), np.array(dis_id_list), np.array(stain_list), np.array(dis_list), np.array(dataset)
 
+def readCSV_svs(dirpath, mode, unu_flag=True):
+    # 免疫染色のリスト mensen_list
+    # 病名のリスト dis_list
+    # 症例データ dlist
+    # 症例番号と病名番号の対応付け dis_id
+
+    csv_data = open(f'{dirpath}/Kurume_img_list.csv')
+    reader = csv.reader(csv_data)
+    svs_list = []
+    for row in reader:
+        svs_list.append(row[0])
+    csv_data.close()
+
+    csv_data = open(f'{dirpath}/Data_{mode}Name.csv')
+    reader = csv.reader(csv_data)
+    
+    for row in reader:
+        stain_list = row[2:]
+        break
+    dis_list = []
+    dis_id_list = []
+    unu_list = []
+    dataset = []
+    for row in reader:
+        svs_flag = [row[0] for s in svs_list if row[0] in s]
+        if len(svs_flag) > 0:
+            if row[1] not in dis_list:
+                dis_list.append(row[1])
+
+            idx = dis_list.index(row[1])
+            dis_id_list.extend([idx])
+
+            if unu_flag:
+                unu = [pm2unu(r) for r in row[2:]]
+            else:
+                unu = row[2:]
+            unu_list.append(unu)
+
+            dataset.append(row)
+
+    csv_data.close()
+
+    return np.array(unu_list), np.array(dis_id_list), np.array(stain_list), np.array(dis_list), np.array(dataset)
+
 def makeCSV2(data, dirpath, filename):
     if not os.path.isdir(dirpath):
         os.makedirs(dirpath)

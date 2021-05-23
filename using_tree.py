@@ -119,7 +119,7 @@ class Node(object):
             self.leaf_id = leaf_num
             leaf_num += 1
             # print(leaf_num, self.target_count)
-            dirpath = f'./result/{args.mode}/unu_depth{self.depth}/leafs_data'
+            dirpath = f'{output}/unu_depth{self.depth}/leafs_data'
             utils.save_leaf_data(annotation, dirpath, self.leaf_id)
             return leaf_num
         
@@ -128,7 +128,7 @@ class Node(object):
             self.leaf_id = leaf_num
             leaf_num += 1
             # print(leaf_num, self.target_count)
-            dirpath = f'./result/{args.mode}/unu_depth{self.depth}/leafs_data'
+            dirpath = f'{output}/unu_depth{self.depth}/leafs_data'
             utils.save_leaf_data(annotation, dirpath, self.leaf_id)
             return leaf_num
         
@@ -151,7 +151,7 @@ class Node(object):
             self.leaf_id = leaf_num
             leaf_num += 1
             # print(leaf_num, self.target_count)
-            dirpath = f'./result/{args.mode}/unu_depth{self.depth}/leafs_data'
+            dirpath = f'{output}/unu_depth{self.depth}/leafs_data'
             utils.save_leaf_data(annotation, dirpath, self.leaf_id)
             return leaf_num
 
@@ -179,6 +179,7 @@ class Node(object):
         # データ数の正規化無し
         # データ数の正規化無し
         if option == 0:
+            classes= np.unique(target)
             if numdata != 0:
                 for c in classes:
                     p = float(len(target[target == c])) / numdata
@@ -199,6 +200,19 @@ class Node(object):
                     # print(c,p)
                     if p != 0.0:
                         entropy -= p * np.log2(p)   
+        
+        if option == 2:
+            classes, weight = np.unique(target, return_counts=True)
+            for i,c in enumerate(classes):
+                if c == 3:
+                    weight[i]*=20
+            weight_sum = np.sum(weight)
+
+            if numdata != 0:
+                for i,w in enumerate(weight):
+                    p = float(w) / weight_sum
+                    if p != 0.0:
+                        entropy -= p * np.log2(p) 
 
         return entropy
 
@@ -225,10 +239,10 @@ class Node(object):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='use/not use による決定木の作成')
     parser.add_argument('--mode', help='choose disease name mode (Simple or Full)', choices=['Simple','Full'], default='Simple')
-    parser.add_argument('--depth', help='input tree depth', default=5, type=int)
-    parser.add_argument('--weight_option', help='input weight option', default=0, type=int)
+    parser.add_argument('--depth', help='input tree depth', default=3, type=int)
+    parser.add_argument('--weight_option', help='input weight option', default=1, type=int)
     args = parser.parse_args()
-    option_dir_list = ['./result','./result_normalize']
+    option_dir_list = ['./result','./result_normalize','./result_weight']
 
     max_depth = args.depth
     option = args.weight_option
@@ -242,7 +256,7 @@ if __name__ == "__main__":
         tree = UsingTree(max_depth=depth)
         tree.fit(data, label, label_names, annotation)
         
-        outputdir = f'{output}/unu_depth{depth}'
+        outputdir = f'./{output}/unu_depth{depth}'
         utils.makeCSV2(tree.pred, outputdir, 'Ptable_unu.csv')
         utils.makeCSV2(tree.leaf_hist, outputdir, 'hist_unu.csv')
         utils.makeCSV2(tree.leaf_data, outputdir, 'leaf_list_unu.csv')

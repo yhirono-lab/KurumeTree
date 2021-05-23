@@ -1,0 +1,98 @@
+digraph {
+	node [fontsize=18 shape=rect]
+	0 [label="CD15
+CD30
+PAX5
+EBER
+" shape=ellipse]
+	1 [label="CHL:11
+OI_ILPD:7
+Reactive:6
+THRLBCL:5
+PTCL_NOS:3
+DLBCL:2
+total:40/types:12" color=cyan]
+	2 [label="FL:90
+Reactive:82
+DLBCL:76
+Meta:28
+ATLL:20
+PTCL_NOS:14
+total:392/types:31" color=cyan]
+	3 [label=CD3
+ shape=ellipse]
+	4 [label="ATLL:19
+PTCL_NOS:14
+Reactive:6
+AITL:3
+Composite:2
+Other_neoplasm:1
+total:49/types:10" color=cyan]
+	5 [label="FL:89
+Reactive:76
+DLBCL:76
+Meta:28
+Other_neoplasm:8
+LG_BCL:8
+total:343/types:27" color=cyan]
+	6 [label=CD20
+ shape=ellipse]
+	8 [label="FL:88
+DLBCL:75
+Reactive:46
+LG_BCL:8
+CLL/SLL:6
+MCL:6
+total:259/types:18" color=cyan]
+	9 [label="bcl2
+bcl6
+" shape=ellipse]
+	11 [label="FL:88
+DLBCL:74
+LG_BCL:8
+Reactive:6
+MCL:6
+CLL/SLL:6
+total:208/types:15" color=cyan]
+	12 [label=MUM1
+ shape=ellipse]
+	13 [label="FL:87
+DLBCL:74
+LG_BCL:7
+MCL:6
+CLL/SLL:6
+OI_ILPD:5
+total:205/types:15" color=cyan]
+	14 [label="Reactive:1
+FL:1
+LG_BCL:1
+total:3/types:3" color=cyan]
+	10 [label="Reactive:40
+IgG4_RD:5
+Castleman:3
+DLBCL:1
+EBV_LPD:1
+N/A:1
+total:51/types:6" color=cyan]
+	7 [label="Reactive:30
+Meta:28
+Other_neoplasm:8
+N/A:2
+Others:2
+BPDCN:2
+total:84/types:16" color=cyan]
+	0 -> 1 [label=use]
+	0 -> 2 [label="not use"]
+	2 -> 3 [label=""]
+	3 -> 4 [label="+"]
+	3 -> 5 [label="- or not use"]
+	5 -> 6 [label=""]
+	6 -> 8 [label="+"]
+	8 -> 9 [label=""]
+	9 -> 11 [label=use]
+	11 -> 12 [label=""]
+	12 -> 13 [label=use]
+	12 -> 14 [label="not use"]
+	9 -> 10 [label="not use"]
+	6 -> 7 [label="- or not use"]
+}
