@@ -201,15 +201,15 @@ class UsingTree(object):
         self.node6.num_samples = len(self.node6.label)
         self.node6.num_classes = len(np.unique(self.node6.label))
         self.node6.target_count = np.asarray([len(self.node6.label[self.node6.label == i]) for i in range(len(label_names))])
+        self.node6.split = np.array(
+            (self.node6.data[:, 21] == '+') #FDC
+        )
+        self.node6.feature = [21]
         # self.node6.split = np.array(
-        #     ((self.node6.data[:, 9] == '+') | (self.node6.data[:, 9] == '-')) &
+        #     ((self.node6.data[:, 9] == '+') | (self.node6.data[:, 9] == '-')) & #bcl2,6
         #     ((self.node6.data[:, 10] == '+') | (self.node6.data[:, 10] == '-'))
         # )
         # self.node6.feature = [9,10]
-        self.node6.split = np.array(
-            (self.node6.data[:, 21] == '+')
-        )
-        self.node6.feature = [21]
         # self.node6.split = np.array(
         #     ((self.node6.data[:, 4] == '+') | (self.node6.data[:, 4] == '-')) &
         #     ((self.node6.data[:, 6] == '+') | (self.node6.data[:, 6] == '-')) &
@@ -220,7 +220,7 @@ class UsingTree(object):
         node_id += 1
         print(self.node6.num_samples, self.node6.target_count)
 
-        # bcl2 & bcl6 not use
+        # FDC - or not use
         self.node6.right = Node()
         self.node6.edge_right = '- or not use'
         self.node7 = self.node6.right
@@ -239,7 +239,7 @@ class UsingTree(object):
         utils.save_leaf_data(self.node7.annotation, dirpath, 1)
         print(self.node7.num_samples, self.node7.target_count)
         
-        # bcl2 & bcl6 use
+        # FDC +
         self.node6.left = Node()
         self.node6.edge_left = '+'
         self.node8_sub = self.node6.left
@@ -367,12 +367,12 @@ class Node(object):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='use/not use による決定木の作成')
-    parser.add_argument('--mode', help='choose disease name mode (Simple or Full)', choices=['Simple','Full'], default='Full')
+    parser.add_argument('--mode', help='choose disease name mode (Simple or Full)', choices=['Simple','Full'], default='Simple')
     
     args = parser.parse_args()
 
     # 学習データの読み込み
-    output = f'./result_teacher/FDC/{args.mode}'
+    output = f'./result_teacher/{args.mode}'
     data, label, feature_names, label_names, annotation = utils.readCSV_svs(f'./data', args.mode, unu_flag=False)
     print(data.shape)
     

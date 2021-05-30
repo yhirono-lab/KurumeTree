@@ -240,7 +240,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='use/not use による決定木の作成')
     parser.add_argument('--mode', help='choose disease name mode (Simple or Full)', choices=['Simple','Full'], default='Simple')
     parser.add_argument('--depth', help='input tree depth', default=3, type=int)
-    parser.add_argument('--weight_option', help='input weight option', default=1, type=int)
+    parser.add_argument('--weight_option', help='input weight option', default=0, type=int)
     args = parser.parse_args()
     option_dir_list = ['./result','./result_normalize','./result_weight']
 
@@ -249,7 +249,7 @@ if __name__ == "__main__":
 
     # 学習データの読み込み
     output = f'{option_dir_list[option]}/{args.mode}/'
-    data, label, feature_names, label_names, annotation = utils.readCSV(f'./data', args.mode)
+    data, label, feature_names, label_names, annotation = utils.readCSV_svs(f'./data', args.mode)
             
     for depth in np.array(range(max_depth))+1:
         

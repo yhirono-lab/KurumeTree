@@ -18,7 +18,7 @@ class GraphViz(object):
             os.makedirs(self.dirname)
             
         G = Digraph(format='png')
-        G.attr('node', shape='rect', fontsize='30')
+        G.attr('node', shape='rect', fontsize='30', rankdir="TB")
 
         n = self.tree.root
         self.makeGraph_add_Node(G, n)
