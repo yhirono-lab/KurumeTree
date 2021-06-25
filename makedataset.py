@@ -3,7 +3,7 @@ import collections
 import numpy as np
 from numpy.core.machar import MachAr
 
-def ReadOriginalCSV(filename):
+def ReadOriginalCSV(filename, new_flag=False):
     csv_data = open(filename, 'r', newline='', encoding='utf-8')
     reader = csv.reader(csv_data)
     dataset = []
@@ -12,11 +12,20 @@ def ReadOriginalCSV(filename):
         next(reader)
     
     for row in reader:
-        header = ['No','SimpleName', 'FullName'] + row[62:86]
+        if not new_flag:
+            header = ['No','SimpleName', 'FullName'] + row[62:86]
+        else: 
+            header = ['No','SimpleName', 'FullName'] + row[65:89]
         break
     
-    fix_list = ['＋', '(+,focal)', 'ー', '－', '弱', 'weak', 'ごく少数', '極少数', '少数', '一部', 'N/A', '　']
-    fixed_list = ['+', '+', '-', '-', '', '', '', '', '', '', '', '']
+    fix_list = [
+        '＋', '(+,focal)', 'ー', '－', '弱', 'weak', 'ごく少数', '極少数', 'ごく', '少数', '一部', 'N/A', '+/-', '±', '?', '　', 
+        '赤脾髄に散在性に(+)', 'LEL(+)', '陽性に見えますが挫滅が加わり判定困難です'
+    ]
+    fixed_list = [
+        '+', '+', '-', '-', '', '', '', '', '', '', '', '', '+', '+', '', '', 
+        '+', '+', '+'
+    ]
 
     for idx, stain in enumerate(header):
         if stain == 'κ':
@@ -24,26 +33,46 @@ def ReadOriginalCSV(filename):
         if stain == 'λ':
             header[idx] = 'lambda'
     for row in reader:
-        stain = row[62:86]
-        for i,stain[i] in enumerate(stain):
+        if not new_flag:
+            stain = row[62:86]
+        else:
+            stain = row[65:89]
+        
+        None_flag = False
+        for i, stain[i] in enumerate(stain):
             for j in range(len(fix_list)):
                 if fix_list[j] in stain[i]:
-                    stain[i] =stain[i].replace(fix_list[j], fixed_list[j])
+                    stain[i] = stain[i].replace(fix_list[j], fixed_list[j])
                     
             if stain[i] != '+' and stain[i] != '-' and stain[i] != '':
-                print(row[1], i, stain[i], fix_list[j], stain[i] is not fix_list[j])
-
-        if row[7] is not '':
-            fullname = f'{row[6]}-{row[7]}'
-            dataset.append([row[1], row[6], fullname] + stain)
-        else:
-            fullname = row[6]
-            dataset.append([row[1], row[6], fullname] + stain)
+                if not new_flag:
+                    print(row[1], i, stain[i], fix_list[j], stain[i] is not fix_list[j])
+                else:
+                    print(row[0], i, stain[i], fix_list[j], stain[i] is not fix_list[j])
+            
+            if stain[i] != '':
+                None_flag = True
+        
+        if None_flag:
+            if not new_flag:
+                if row[7] is not '':
+                    fullname = f'{row[6]}-{row[7]}'
+                    dataset.append([row[1], row[6], fullname] + stain)
+                else:
+                    fullname = row[6]
+                    dataset.append([row[1], row[6], fullname] + stain)
+            else:
+                if row[10] is not '':
+                    fullname = f'{row[9]}-{row[10]}'
+                    dataset.append([row[0], row[9], fullname] + stain)
+                else:
+                    fullname = row[9]
+                    dataset.append([row[0], row[9], fullname] + stain)
     
     return np.array([header] + dataset)
 
 def MatchSVSlist(data):
-    svs_list =  np.loadtxt('./data/Kurume_img_list.csv', dtype='str', delimiter=',')
+    svs_list =  np.loadtxt('./add_data/Kurume_img_list.txt', dtype='str', delimiter=',')
     data_svs = [data[0]]
     for d in data[1:]:
         d_svs = [d for svs in svs_list if d[0] in svs[:11]]
@@ -57,7 +86,10 @@ def WriteMultiCSV(data, filename):
     csv_file = open(filename, 'w', newline='')
     writer = csv.writer(csv_file)
     for d in data:
-        writer.writerow(d)
+        try:
+            writer.writerow(d)
+        except:
+            print(d)
     csv_file.close()
 
 def WriteSingleCSV(data, filename):
@@ -87,25 +119,25 @@ def Add_Diseasae(dataset, file_label):
 
     
 
-dataset = ReadOriginalCSV('data/ML180001-180660 _to_NIT.csv')
-WriteSingleCSV(dataset[0][3:], 'data/Stain_list.csv')
+dataset = ReadOriginalCSV('./add_data/ML180001_182700.csv', new_flag=True)
+WriteSingleCSV(dataset[0][3:], 'add_data/Stain_list.csv')
 
 dataset_simple, count_sort = Add_Diseasae(dataset, 'SimpleName')
-WriteMultiCSV(dataset_simple, 'data/Data_SimpleName.csv')
-WriteDicCSV(count_sort, f'data/Disease_SimpleName_list.csv')
+WriteMultiCSV(dataset_simple, 'add_data/Data_SimpleName.csv')
+WriteDicCSV(count_sort, f'add_data/Disease_SimpleName_list.csv')
 
 dataset_full, count_sort = Add_Diseasae(dataset, 'FullName')
-WriteMultiCSV(dataset_full, 'data/Data_FullName.csv')
-WriteDicCSV(count_sort, f'data/Disease_FullName_list.csv')
+WriteMultiCSV(dataset_full, 'add_data/Data_FullName.csv')
+WriteDicCSV(count_sort, f'add_data/Disease_FullName_list.csv')
 
 dataset_svs = MatchSVSlist(dataset)
 
 dataset_svs_simple, count_sort = Add_Diseasae(dataset_svs, 'SimpleName')
-WriteMultiCSV(dataset_svs_simple, 'data/Data_SimpleName_svs.csv')
-WriteDicCSV(count_sort, f'data/Disease_SimpleName_svs_list.csv')
+WriteMultiCSV(dataset_svs_simple, 'add_data/Data_SimpleName_svs.csv')
+WriteDicCSV(count_sort, f'add_data/Disease_SimpleName_svs_list.csv')
 
 dataset_svs_full, count_sort = Add_Diseasae(dataset_svs, 'FullName')
-WriteMultiCSV(dataset_svs_full, 'data/Data_FullName_svs.csv')
-WriteDicCSV(count_sort, f'data/Disease_FullName_svs_list.csv')
+WriteMultiCSV(dataset_svs_full, 'add_data/Data_FullName_svs.csv')
+WriteDicCSV(count_sort, f'add_data/Disease_FullName_svs_list.csv')
 
 
