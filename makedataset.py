@@ -72,7 +72,7 @@ def ReadOriginalCSV(filename, new_flag=False):
     return np.array([header] + dataset)
 
 def MatchSVSlist(data):
-    svs_list =  np.loadtxt('./add_data/Kurume_img_list.txt', dtype='str', delimiter=',')
+    svs_list =  np.loadtxt(f'./{dir_list[add_option]}/Kurume_img_list.txt', dtype='str', delimiter=',')
     data_svs = [data[0]]
     for d in data[1:]:
         d_svs = [d for svs in svs_list if d[0] in svs[:11]]
@@ -117,27 +117,31 @@ def Add_Diseasae(dataset, file_label):
     count_sort = sorted(count.items(), key=lambda x:x[1], reverse=True)
     return dataset, count_sort
 
-    
 
-dataset = ReadOriginalCSV('./add_data/ML180001_182700.csv', new_flag=True)
-WriteSingleCSV(dataset[0][3:], 'add_data/Stain_list.csv')
+add_option = 1
+dir_list = ['data', 'add_data']
+flag = [False, True]
+dataset_list = ['ML180001_180660.csv', 'ML180001_182700.csv']
+
+dataset = ReadOriginalCSV(f'./{dir_list[add_option]}/{dataset_list[add_option]}', new_flag=flag[add_option])
+WriteSingleCSV(dataset[0][3:], f'{dir_list[add_option]}/Stain_list.csv')
 
 dataset_simple, count_sort = Add_Diseasae(dataset, 'SimpleName')
-WriteMultiCSV(dataset_simple, 'add_data/Data_SimpleName.csv')
-WriteDicCSV(count_sort, f'add_data/Disease_SimpleName_list.csv')
+WriteMultiCSV(dataset_simple, f'{dir_list[add_option]}/Data_SimpleName.csv')
+WriteDicCSV(count_sort, f'{dir_list[add_option]}/Disease_SimpleName_list.csv')
 
 dataset_full, count_sort = Add_Diseasae(dataset, 'FullName')
-WriteMultiCSV(dataset_full, 'add_data/Data_FullName.csv')
-WriteDicCSV(count_sort, f'add_data/Disease_FullName_list.csv')
+WriteMultiCSV(dataset_full, f'{dir_list[add_option]}/Data_FullName.csv')
+WriteDicCSV(count_sort, f'{dir_list[add_option]}/Disease_FullName_list.csv')
 
 dataset_svs = MatchSVSlist(dataset)
 
 dataset_svs_simple, count_sort = Add_Diseasae(dataset_svs, 'SimpleName')
-WriteMultiCSV(dataset_svs_simple, 'add_data/Data_SimpleName_svs.csv')
-WriteDicCSV(count_sort, f'add_data/Disease_SimpleName_svs_list.csv')
+WriteMultiCSV(dataset_svs_simple, f'{dir_list[add_option]}/Data_SimpleName_svs.csv')
+WriteDicCSV(count_sort, f'{dir_list[add_option]}/Disease_SimpleName_svs_list.csv')
 
 dataset_svs_full, count_sort = Add_Diseasae(dataset_svs, 'FullName')
-WriteMultiCSV(dataset_svs_full, 'add_data/Data_FullName_svs.csv')
-WriteDicCSV(count_sort, f'add_data/Disease_FullName_svs_list.csv')
+WriteMultiCSV(dataset_svs_full, f'{dir_list[add_option]}/Data_FullName_svs.csv')
+WriteDicCSV(count_sort, f'{dir_list[add_option]}/Disease_FullName_svs_list.csv')
 
 

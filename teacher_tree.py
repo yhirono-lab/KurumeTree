@@ -368,12 +368,16 @@ class Node(object):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='use/not use による決定木の作成')
     parser.add_argument('--mode', help='choose disease name mode (Simple or Full)', choices=['Simple','Full'], default='Simple')
+    parser.add_argument('--data', help='choose dataset version', choices=['', 'add'], default='add')
     
     args = parser.parse_args()
 
+    if args.data == 'add':
+        args.data = 'add_'
+
     # 学習データの読み込み
-    output = f'./result_teacher/{args.mode}'
-    data, label, feature_names, label_names, annotation = utils.readCSV_svs(f'./data', args.mode, unu_flag=False)
+    output = f'./{args.data}result_teacher/FDC/{args.mode}'
+    data, label, feature_names, label_names, annotation = utils.readCSV_svs(f'./{args.data}data', args.mode, unu_flag=False)
     print(data.shape)
     
     tree = UsingTree()

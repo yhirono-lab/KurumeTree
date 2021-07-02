@@ -53,7 +53,7 @@ def readCSV_svs(dirpath, mode, unu_flag=True):
     # 症例データ dlist
     # 症例番号と病名番号の対応付け dis_id
 
-    csv_data = open(f'{dirpath}/Kurume_img_list.csv')
+    csv_data = open(f'{dirpath}/Kurume_img_list.txt')
     reader = csv.reader(csv_data)
     svs_list = []
     for row in reader:
@@ -71,7 +71,7 @@ def readCSV_svs(dirpath, mode, unu_flag=True):
     unu_list = []
     dataset = []
     for row in reader:
-        svs_flag = [row[0] for s in svs_list if row[0] in s]
+        svs_flag = [row[0] for s in svs_list if row[0] in s[:11]]
         if len(svs_flag) > 0:
             if row[1] not in dis_list:
                 dis_list.append(row[1])
@@ -86,7 +86,6 @@ def readCSV_svs(dirpath, mode, unu_flag=True):
             unu_list.append(unu)
 
             dataset.append(row)
-
     csv_data.close()
 
     return np.array(unu_list), np.array(dis_id_list), np.array(stain_list), np.array(dis_list), np.array(dataset)
