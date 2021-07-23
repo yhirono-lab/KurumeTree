@@ -118,7 +118,7 @@ def Add_Diseasae(dataset, file_label):
     return dataset, count_sort
 
 
-add_option = 1
+add_option = 0
 dir_list = ['data', 'add_data']
 flag = [False, True]
 dataset_list = ['ML180001_180660.csv', 'ML180001_182700.csv']
