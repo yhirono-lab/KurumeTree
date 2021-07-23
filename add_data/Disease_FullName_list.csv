@@ -1,44 +1,43 @@
-Reactive,394
-DLBCL-nonGC,256
-DLBCL-GC,179
-FL-G2,143
-FL-G3a,90
-FL-G1,89
-MALT,76
-ATLL,76
-PTCL_NOS,62
-DLBCL-CD5+,61
-,60
-Meta-carcinoma,57
-AITL,55
-FL-G3b,53
-Others,47
-N/A,41
+Reactive,399
+DLBCL-nonGC,262
+DLBCL-GC,182
+FL-G2,148
+FL-G3a,92
+FL-G1,92
+ATLL,78
+MALT,77
+DLBCL-CD5+,63
+PTCL_NOS,63
+Meta-carcinoma,61
+AITL,58
+FL-G3b,55
+Others,50
+N/A,42
 MCL,39
+Reactive-Kikuchi,38
 LG_BCL,37
-Reactive-Kikuchi,36
-HG_BCL,36
+HG_BCL,37
 CHL-MC,33
-OI_ILPD-DLBCL,29
+OI_ILPD-DLBCL,30
 CHL-NS,28
 Others-Normo,27
+Meta-adenocarcinoma,23
 CLL/SLL,23
-Meta-adenocarcinoma,22
-THRLBCL,21
+THRLBCL,22
 Meta-SqCC,20
+NMZL,19
 Other_neoplasm-carcinoma,19
-NMZL,18
 IgG4_RD,16
+BL,16
 Composite-DLBCL_AITL,15
 Others-Hypo,14
-BL,13
-PCM,12
+PCM,13
 BCL_NOS,12
 Reactive-sarcoidosis,11
 ENKTL,11
+Other_neoplasm-adenocarcinoma,11
 DLBCL,10
 OI_ILPD-CHL,10
-Other_neoplasm-adenocarcinoma,10
 ALCL-ALKneg,9
 DLBCL_CNS,8
 Castleman-PC,8
@@ -60,18 +59,19 @@ EBV_DLBCL,4
 Other_neoplasm-Warthin's tumor,4
 T_PLL,4
 Meta-prostate carcinoma,4
+OI_ILPD,4
 Other_neoplasm-melanoma,4
 EoPC,4
 CTCL,4
 DLBCL-DEL,4
 Castleman-HV,4
+MS,4
 OI_ILPD-FL,4
 PMBL,4
 OI_ILPD-THRLBCL,3
 Other_neoplasm-thymoma,3
 Other_neoplasm-schwannoma,3
 Other_neoplasm-salivary gland tumor,3
-OI_ILPD,3
 SBCL_U,3
 AML,3
 PC_CD4LPD,3
@@ -80,11 +80,11 @@ Other_neoplasm-seminoma,3
 Composite-DLBCL_PTCL,3
 Other_neoplasm-NEC,3
 Other_neoplasm-GIST,3
-MS,3
 CHL,3
 Meta,2
 OI_ILPD-AITL,2
 CHL-LD,2
+Other_neoplasm-ganglioneuroma,2
 Reactive-Cat scratch,2
 Reactive-Kimura's disease,2
 Other_neoplasm-rhabdomyosarcoma,2
@@ -112,7 +112,6 @@ HS,1
 OI_ILPD-CLL/SLL,1
 Other_neoplasm-follicular tumor,1
 DLBCL_CNS-nonGC,1
-Other_neoplasm-ganglioneuroma,1
 Castleman,1
 MPN,1
 PTLD-CHL,1
@@ -150,6 +149,7 @@ Other_neoplasm-NET,1
 Other_neoplasm-desmoid,1
 Meta-SCC,1
 Other_neoplasm-spindle cell tumor,1
+,1
 Other_neoplasm-leiomyoma,1
 Others-Hyper,1
 Composite-FL_PTCL,1
@@ -179,3 +179,4 @@ Other_neoplasm-adenoid cystic carcinoma,1
 Meta-breast cancer,1
 Other_neoplasm-lymphoepithelial carcinoma,1
 B_LBL,1
+FL-G1-2,1

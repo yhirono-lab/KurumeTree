@@ -108,7 +108,7 @@ def WriteDicCSV(data, filename):
 
 def Add_Diseasae(dataset, file_label):
     if file_label == 'SimpleName':
-       dataset = np.delete(dataset, 2, axis=1)
+        dataset = np.delete(dataset, 2, axis=1)
     if file_label == 'FullName':
         dataset = np.delete(dataset, 1, axis=1)
     
@@ -118,13 +118,14 @@ def Add_Diseasae(dataset, file_label):
     return dataset, count_sort
 
 
-add_option = 0
+add_option = 1
 dir_list = ['data', 'add_data']
 flag = [False, True]
 dataset_list = ['ML180001_180660.csv', 'ML180001_182700.csv']
 
 dataset = ReadOriginalCSV(f'./{dir_list[add_option]}/{dataset_list[add_option]}', new_flag=flag[add_option])
 WriteSingleCSV(dataset[0][3:], f'{dir_list[add_option]}/Stain_list.csv')
+
 
 dataset_simple, count_sort = Add_Diseasae(dataset, 'SimpleName')
 WriteMultiCSV(dataset_simple, f'{dir_list[add_option]}/Data_SimpleName.csv')
@@ -135,6 +136,13 @@ WriteMultiCSV(dataset_full, f'{dir_list[add_option]}/Data_FullName.csv')
 WriteDicCSV(count_sort, f'{dir_list[add_option]}/Disease_FullName_list.csv')
 
 dataset_svs = MatchSVSlist(dataset)
+
+count = 0
+for data in dataset_svs:
+    if data[1] == '':
+        count += 1
+        print(data[0])
+print(count) 
 
 dataset_svs_simple, count_sort = Add_Diseasae(dataset_svs, 'SimpleName')
 WriteMultiCSV(dataset_svs_simple, f'{dir_list[add_option]}/Data_SimpleName_svs.csv')
