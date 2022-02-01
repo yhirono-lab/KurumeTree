@@ -189,7 +189,7 @@ class UsingTree(object):
         utils.save_leaf_data(self.node6_sub.annotation, dirpath, 0)
         print(self.node6_sub.num_samples, self.node6_sub.target_count)
 
-        # bcl2 & bcl6 use/not use
+        # FDC use/not use
         self.node6_sub.right = Node()
         self.node6_sub.edge_right = ''
         self.node6 = self.node6_sub.right
@@ -376,7 +376,7 @@ if __name__ == '__main__':
         args.data = 'add_'
 
     # 学習データの読み込み
-    output = f'./{args.data}result_teacher/FDC/{args.mode}'
+    output = f'./{args.data}result_teacher/nazo/{args.mode}'
     data, label, feature_names, label_names, annotation = utils.readCSV_svs(f'./{args.data}data', args.mode, unu_flag=False)
     print(data.shape)
     
