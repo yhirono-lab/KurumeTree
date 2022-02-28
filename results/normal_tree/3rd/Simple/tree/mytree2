@@ -1,0 +1,48 @@
+digraph {
+	node [fontsize=30 rankdir=TB shape=rect]
+	0 [label=MUM1 shape=ellipse]
+	1 [label=CD4 shape=ellipse]
+	2 [label="Reactive:307
+CHL:48
+Castleman:14
+FL:14
+IgG4_RD:11
+OI_ILPD:10
+DLBCL:6
+MCL:4
+THRLBCL:3" color=cyan]
+	3 [label="ATLL:69
+AITL:47
+PTCL_NOS:43
+Reactive:42
+CHL:22
+ALCL:15
+Composite:11
+T_LBL:6
+OI_ILPD:5" color=cyan]
+	4 [label="FDC meshwork" shape=ellipse]
+	5 [label="DLBCL:326
+OI_ILPD:28
+HG_BCL:25
+FL:21
+MCL:20
+Reactive:18
+THRLBCL:14
+CLL/SLL:12
+BL:9" color=cyan]
+	6 [label="FL:399
+DLBCL:69
+Reactive:28
+MCL:23
+LG_BCL:20
+NMZL:15
+Composite:14
+CLL/SLL:13
+AITL:11" color=cyan]
+	0 -> 1 [label="not use"]
+	1 -> 2 [label="not use"]
+	1 -> 3 [label=use]
+	0 -> 4 [label=use]
+	4 -> 5 [label="not use"]
+	4 -> 6 [label=use]
+}

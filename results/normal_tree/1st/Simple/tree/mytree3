@@ -1,0 +1,89 @@
+digraph {
+	node [fontsize=30 rankdir=TB shape=rect]
+	0 [label=MUM1 shape=ellipse]
+	1 [label=CD4 shape=ellipse]
+	2 [label=bcl2 shape=ellipse]
+	3 [label="Meta:24
+Reactive:11
+Other_neoplasm:7
+N/A:3
+OI_ILPD:2
+CHL:2
+DLBCL:1
+Others:1" color=cyan]
+	4 [label="Reactive:65
+IgG4_RD:6
+Castleman:3
+CHL:2
+Other_neoplasm:1
+EBV_LPD:1
+AML:1
+N/A:1
+Others:1" color=cyan]
+	5 [label=EBER shape=ellipse]
+	6 [label="ATLL:20
+PTCL_NOS:6
+Other_neoplasm:1
+CHL:1
+MLN_FGFR1:1
+HS:1
+IgG4_RD:1" color=cyan]
+	7 [label="PTCL_NOS:11
+CHL:7
+AITL:4
+Reactive:3
+Meta:2
+Composite:2
+BPDCN:2
+THRLBCL:1" color=cyan]
+	8 [label="FDC meshwork" shape=ellipse]
+	9 [label=CD30 shape=ellipse]
+	10 [label="DLBCL:60
+Reactive:4
+FL:3
+BL:3
+LG_BCL:3
+OI_ILPD:2
+Meta:2
+MALT:2
+MCL:2" color=cyan]
+	11 [label="OI_ILPD:7
+THRLBCL:4
+DLBCL:3
+Composite:2
+PCM:1
+CHL:1
+Reactive:1
+FL:1
+EBV_LPD:1" color=cyan]
+	12 [label=cyclinD1 shape=ellipse]
+	13 [label="FL:70
+DLBCL:11
+OI_ILPD:3
+BCL_NOS:1
+HG_BCL:1
+Reactive:1" color=cyan]
+	14 [label="FL:16
+CLL/SLL:4
+LG_BCL:4
+MCL:4
+Reactive:3
+DLBCL:3
+NMZL:2
+Composite:1
+LPL:1" color=cyan]
+	0 -> 1 [label="not use"]
+	1 -> 2 [label="not use"]
+	2 -> 3 [label="not use"]
+	2 -> 4 [label=use]
+	1 -> 5 [label=use]
+	5 -> 6 [label="not use"]
+	5 -> 7 [label=use]
+	0 -> 8 [label=use]
+	8 -> 9 [label="not use"]
+	9 -> 10 [label="not use"]
+	9 -> 11 [label=use]
+	8 -> 12 [label=use]
+	12 -> 13 [label="not use"]
+	12 -> 14 [label=use]
+}

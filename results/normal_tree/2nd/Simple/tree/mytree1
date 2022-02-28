@@ -1,0 +1,24 @@
+digraph {
+	node [fontsize=30 rankdir=TB shape=rect]
+	0 [label=MUM1 shape=ellipse]
+	1 [label="Reactive:320
+Meta:112
+ATLL:59
+CHL:54
+AITL:42
+PTCL_NOS:39
+N/A:23
+Other_neoplasm:20
+OI_ILPD:13" color=cyan]
+	2 [label="FL:344
+DLBCL:335
+Reactive:44
+MCL:37
+OI_ILPD:30
+HG_BCL:25
+LG_BCL:22
+Composite:20
+CLL/SLL:20" color=cyan]
+	0 -> 1 [label="not use"]
+	0 -> 2 [label=use]
+}

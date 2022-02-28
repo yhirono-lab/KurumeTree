@@ -1,0 +1,81 @@
+digraph {
+	node [fontsize=18 shape=rect]
+	0 [label="CD15
+CD30
+PAX5
+EBER
+" shape=ellipse]
+	1 [label="CHL:68
+Reactive:23
+OI_ILPD:21
+THRLBCL:14
+ALCL:9
+PTCL_NOS:9
+total:180/types:19" color=cyan]
+	2 [label="FL:432
+DLBCL:396
+Reactive:372
+ATLL:63
+AITL:51
+MCL:47
+total:1682/types:45" color=cyan]
+	3 [label=CD3
+ shape=ellipse]
+	4 [label="Reactive:288
+ATLL:61
+AITL:51
+PTCL_NOS:34
+Composite:14
+FL:12
+total:504/types:21" color=cyan]
+	5 [label="FL:420
+DLBCL:395
+Reactive:84
+MCL:47
+HG_BCL:30
+LG_BCL:28
+total:1178/types:35" color=cyan]
+	6 [label=CD20
+ shape=ellipse]
+	8 [label="FL:417
+DLBCL:391
+Reactive:50
+MCL:47
+HG_BCL:30
+LG_BCL:28
+total:1113/types:29" color=cyan]
+	9 [label="FDC meshwork
+" shape=ellipse]
+	11 [label="FL:373
+MCL:18
+DLBCL:11
+Reactive:9
+LG_BCL:9
+NMZL:5
+total:443/types:15" color=cyan]
+	10 [label="DLBCL:380
+FL:44
+Reactive:41
+MCL:29
+HG_BCL:27
+CLL/SLL:23
+total:670/types:28" color=cyan]
+	7 [label="Reactive:34
+CHL:7
+DLBCL:4
+ALCL:3
+PTCL_NOS:3
+FL:3
+total:65/types:14" color=cyan]
+	0 -> 1 [label=use]
+	0 -> 2 [label="not use"]
+	2 -> 3 [label=""]
+	3 -> 4 [label="+"]
+	3 -> 5 [label="- or not use"]
+	5 -> 6 [label=""]
+	6 -> 8 [label="+"]
+	8 -> 9 [label=""]
+	9 -> 11 [label="+"]
+	9 -> 10 [label="- or not use"]
+	6 -> 7 [label="- or not use"]
+}

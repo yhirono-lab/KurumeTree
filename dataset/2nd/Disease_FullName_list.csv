@@ -1,0 +1,182 @@
+Reactive,399
+DLBCL-nonGC,262
+DLBCL-GC,182
+FL-G2,148
+FL-G3a,92
+FL-G1,92
+ATLL,78
+MALT,77
+DLBCL-CD5+,63
+PTCL_NOS,63
+Meta-carcinoma,61
+AITL,58
+FL-G3b,55
+Others,50
+N/A,43
+MCL,39
+Reactive-Kikuchi,38
+LG_BCL,37
+HG_BCL,37
+CHL-MC,33
+OI_ILPD-DLBCL,29
+CHL-NS,28
+Others-Normo,27
+Meta-adenocarcinoma,23
+CLL/SLL,23
+THRLBCL,22
+Meta-SqCC,20
+NMZL,19
+Other_neoplasm-carcinoma,19
+IgG4_RD,16
+BL,16
+Composite-DLBCL_AITL,15
+Others-Hypo,14
+PCM,13
+BCL_NOS,12
+Reactive-sarcoidosis,11
+ENKTL,11
+Other_neoplasm-adenocarcinoma,11
+DLBCL,10
+OI_ILPD-CHL,10
+ALCL-ALKneg,9
+DLBCL_CNS,8
+Castleman-PC,8
+MF,7
+ALCL-ALKpos,7
+Meta-NEC,7
+Other_neoplasm-SqCC,7
+LPL,6
+BPDCN,6
+Reactive-Tb,6
+FL-in_situ,6
+EBV_LPD,5
+T_LBL,5
+Infiltraion_BCL,5
+Other_neoplasm-malignant tumor,5
+NPTCL_Tfh,5
+Composite-CHL_PTCL,4
+EBV_DLBCL,4
+Other_neoplasm-Warthin's tumor,4
+T_PLL,4
+Meta-prostate carcinoma,4
+OI_ILPD,4
+Other_neoplasm-melanoma,4
+EoPC,4
+CTCL,4
+DLBCL-DEL,4
+Castleman-HV,4
+MS,4
+OI_ILPD-FL,4
+PMBL,4
+OI_ILPD-THRLBCL,3
+Other_neoplasm-thymoma,3
+Other_neoplasm-schwannoma,3
+Other_neoplasm-salivary gland tumor,3
+SBCL_U,3
+AML,3
+PC_CD4LPD,3
+MDS,3
+Other_neoplasm-seminoma,3
+Composite-DLBCL_PTCL,3
+Other_neoplasm-NEC,3
+Other_neoplasm-GIST,3
+CHL,3
+Meta,2
+OI_ILPD-AITL,2
+CHL-LD,2
+Other_neoplasm-ganglioneuroma,2
+Reactive-Cat scratch,2
+Reactive-Kimura's disease,2
+Other_neoplasm-rhabdomyosarcoma,2
+SMZL,2
+FL,2
+Other_neoplasm-SCC,2
+CHL-LR,2
+Other_neoplasm-glioblastoma,2
+DLBCL-Richter,2
+IVL,2
+TCL_NOS,2
+FL-G1/2,2
+PCALCL-ALKneg,2
+Other_neoplasm-papilloma,2
+HCL,2
+HG_BCL-DEL,2
+Infiltration_BCL-DLBCL,2
+DLBCL-CD5+10+,1
+Other_neoplasm-oncocytoma,1
+Meta-papillary adenocarcinoma,1
+ITLPD_GI,1
+Other_neoplasm-Papillary carcinoma,1
+Composite-ATLL_EBVDLBCL,1
+HS,1
+OI_ILPD-CLL/SLL,1
+Other_neoplasm-follicular tumor,1
+DLBCL_CNS-nonGC,1
+Castleman,1
+MPN,1
+PTLD-CHL,1
+Other_neoplasm-liposarcoma,1
+LG_BCL-CD5+,1
+Other_neoplasm-germ cell tumor,1
+Composite-LCH_BCL,1
+MLN_FGFR1,1
+FL-G3,1
+Other_neoplasm-thyroid carcinoma,1
+Meta-lymphoepithelial carcinoma,1
+Other_neoplasm-UPS/MFH,1
+Other_neoplasm-sarcoma,1
+LCH,1
+Other_neoplasm-urothelial carcinoma,1
+DLBCL_leg,1
+Composite-CHL_AITL,1
+Meta-germ cell tumor,1
+FL_Pedia,1
+Reactive-TAFRO,1
+PTLD-DLBCL,1
+Meta-melanoma,1
+MEITL,1
+Composite-PTCL_EBVDLBCL,1
+Other_neoplasm-pleomorphic adenoma,1
+PCALCL,1
+Composite-FL_DLBCL,1
+Composite-BALL_FL,1
+OI_ILPD-DLBCL_AITL,1
+Lennert,1
+ILPD-DLBCL,1
+Hematopoietic_neoplasm,1
+PBL,1
+Other_neoplasm-NET,1
+Other_neoplasm-desmoid,1
+Meta-SCC,1
+Other_neoplasm-spindle cell tumor,1
+,1
+Other_neoplasm-leiomyoma,1
+Others-Hyper,1
+Composite-FL_PTCL,1
+DLBCL_CNS-CD5+,1
+Other_neoplasm-hemangioma,1
+Infiltraion_BCL-DLBCL,1
+Infiltraion_BCL-FL,1
+Meta-sarcoma,1
+Meta-malignant tumor,1
+Composite-ATLL_FL,1
+Other_neoplasm-granulosa cell tumor,1
+OI_ILPD-LyG,1
+ILPD,1
+Infiltraion_TCL-AITL,1
+Other_neoplasm-fibroma,1
+GZL,1
+MCL-in_situ,1
+Meta-NET,1
+Other_neoplasm-RCC,1
+OI_ILPD-PTCL,1
+Other_neoplasm-olfactory neuroblastoma,1
+SS,1
+OI_ILPD-CHL_PTCL,1
+Infiltration_BCL-MALT,1
+Meta-seminoma,1
+Other_neoplasm-adenoid cystic carcinoma,1
+Meta-breast cancer,1
+Other_neoplasm-lymphoepithelial carcinoma,1
+B_LBL,1
+FL-G1-2,1

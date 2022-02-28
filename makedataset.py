@@ -2,8 +2,9 @@ import csv
 import collections
 import numpy as np
 from numpy.core.machar import MachAr
+from pathlib import Path
 
-def ReadOriginalCSV(filename, new_flag=False):
+def ReadOriginalCSV(filename, data_option):
     csv_data = open(filename, 'r', newline='', encoding='utf-8')
     reader = csv.reader(csv_data)
     dataset = []
@@ -12,18 +13,22 @@ def ReadOriginalCSV(filename, new_flag=False):
         next(reader)
     
     for row in reader:
-        if not new_flag:
+        if data_option == '1st':
             header = ['No','SimpleName', 'FullName'] + row[62:86]
-        else: 
+        elif data_option == '2nd': 
             header = ['No','SimpleName', 'FullName'] + row[65:89]
+        elif data_option == '3rd':
+            header = ['No','SimpleName', 'FullName'] + row[62:86]
         break
     
     fix_list = [
-        '＋', '(+,focal)', 'ー', '－', '弱', 'weak', 'ごく少数', '極少数', 'ごく', '少数', '一部', 'N/A', '+/-', '±', '?', '　', 
+        '＋', '(+,focal)', 'ー', '－', '弱', 'weak', 'ごく少数', '極少数', 'ごく', '少数', '一部',
+        'N/A', '+/-', '-/+', '±', '?', '　', 
         '赤脾髄に散在性に(+)', 'LEL(+)', '陽性に見えますが挫滅が加わり判定困難です'
     ]
     fixed_list = [
-        '+', '+', '-', '-', '', '', '', '', '', '', '', '', '+', '+', '', '', 
+        '+', '+', '-', '-', '', '', '', '', '', '', '',
+        '', '+', '-', '+', '', '', 
         '+', '+', '+'
     ]
 
@@ -33,10 +38,12 @@ def ReadOriginalCSV(filename, new_flag=False):
         if stain == 'λ':
             header[idx] = 'lambda'
     for row in reader:
-        if not new_flag:
+        if data_option == '1st':
             stain = row[62:86]
-        else:
+        elif data_option == '2nd':
             stain = row[65:89]
+        elif data_option == '3rd':
+            stain = row[62:86]
         
         None_flag = False
         for i, stain[i] in enumerate(stain):
@@ -45,34 +52,43 @@ def ReadOriginalCSV(filename, new_flag=False):
                     stain[i] = stain[i].replace(fix_list[j], fixed_list[j])
                     
             if stain[i] != '+' and stain[i] != '-' and stain[i] != '':
-                if not new_flag:
+                if data_option == '1st':
                     print(row[1], i, stain[i], fix_list[j], stain[i] is not fix_list[j])
-                else:
+                elif data_option == '2nd':
                     print(row[0], i, stain[i], fix_list[j], stain[i] is not fix_list[j])
+                elif data_option == '3rd':
+                    print(row[62:86], i, stain[i], fix_list[j], stain[i] is not fix_list[j])
             
             if stain[i] != '':
                 None_flag = True
         
         if None_flag:
-            if not new_flag:
+            if data_option == '1st':
                 if row[7] is not '':
                     fullname = f'{row[6]}-{row[7]}'
                     dataset.append([row[1], row[6], fullname] + stain)
                 else:
                     fullname = row[6]
                     dataset.append([row[1], row[6], fullname] + stain)
-            else:
+            elif data_option == '2nd':
                 if row[10] is not '':
                     fullname = f'{row[9]}-{row[10]}'
                     dataset.append([row[0], row[9], fullname] + stain)
                 else:
                     fullname = row[9]
                     dataset.append([row[0], row[9], fullname] + stain)
+            elif data_option == '3rd':
+                if row[7] is not '':
+                    fullname = f'{row[6]}-{row[7]}'
+                    dataset.append([row[1], row[6], fullname] + stain)
+                else:
+                    fullname = row[6]
+                    dataset.append([row[1], row[6], fullname] + stain)
     
     return np.array([header] + dataset)
 
-def MatchSVSlist(data):
-    svs_list =  np.loadtxt(f'./{dir_list[add_option]}/Kurume_img_list.txt', dtype='str', delimiter=',')
+def MatchSVSlist(data, data_option):
+    svs_list =  np.loadtxt(f'./Raw_data/{data_option}/Kurume_img_list.txt', dtype='str', delimiter=',')
     data_svs = [data[0]]
     for d in data[1:]:
         d_svs = [d for svs in svs_list if d[0] in svs[:11]]
@@ -106,6 +122,8 @@ def WriteDicCSV(data, filename):
         writer.writerow(list(d))
     csv_file.close()
 
+# SimpleNameなのかFullNameなのかを選ぶ
+# 各病型のカウントも行う
 def Add_Diseasae(dataset, file_label):
     if file_label == 'SimpleName':
         dataset = np.delete(dataset, 2, axis=1)
@@ -118,38 +136,35 @@ def Add_Diseasae(dataset, file_label):
     return dataset, count_sort
 
 
-add_option = 1
-dir_list = ['data', 'add_data']
-flag = [False, True]
-dataset_list = ['ML180001_180660.csv', 'ML180001_182700.csv']
+data_option = 2
+dir_list = ['1st', '2nd', '3rd']
+dataset_list = ['ML180001_180660.csv', 'ML180001_182700.csv', 'O_C_00001-02530.csv']
+data_dir = dir_list[data_option]
+Raw_data = dataset_list[data_option]
+save_dir = Path(f'./dataset/{data_dir}')
+save_dir.mkdir(exist_ok=True, parents=True)
 
-dataset = ReadOriginalCSV(f'./{dir_list[add_option]}/{dataset_list[add_option]}', new_flag=flag[add_option])
-WriteSingleCSV(dataset[0][3:], f'{dir_list[add_option]}/Stain_list.csv')
+dataset = ReadOriginalCSV(f'./Raw_data/{data_dir}/{Raw_data}', data_option=data_dir)
+WriteSingleCSV(dataset[0][3:], f'./dataset/{data_dir}/Stain_list.csv')
 
 
 dataset_simple, count_sort = Add_Diseasae(dataset, 'SimpleName')
-WriteMultiCSV(dataset_simple, f'{dir_list[add_option]}/Data_SimpleName.csv')
-WriteDicCSV(count_sort, f'{dir_list[add_option]}/Disease_SimpleName_list.csv')
+WriteMultiCSV(dataset_simple, f'./dataset/{data_dir}/Data_SimpleName.csv')
+WriteDicCSV(count_sort, f'./dataset/{data_dir}/Disease_SimpleName_list.csv')
 
 dataset_full, count_sort = Add_Diseasae(dataset, 'FullName')
-WriteMultiCSV(dataset_full, f'{dir_list[add_option]}/Data_FullName.csv')
-WriteDicCSV(count_sort, f'{dir_list[add_option]}/Disease_FullName_list.csv')
+WriteMultiCSV(dataset_full, f'./dataset/{data_dir}/Data_FullName.csv')
+WriteDicCSV(count_sort, f'./dataset/{data_dir}/Disease_FullName_list.csv')
 
-dataset_svs = MatchSVSlist(dataset)
-
-count = 0
-for data in dataset_svs:
-    if data[1] == '':
-        count += 1
-        print(data[0])
-print(count) 
+"""持っているsvsファイルのデータのみ抽出して保存"""
+dataset_svs = MatchSVSlist(dataset, data_dir)
 
 dataset_svs_simple, count_sort = Add_Diseasae(dataset_svs, 'SimpleName')
-WriteMultiCSV(dataset_svs_simple, f'{dir_list[add_option]}/Data_SimpleName_svs.csv')
-WriteDicCSV(count_sort, f'{dir_list[add_option]}/Disease_SimpleName_svs_list.csv')
+WriteMultiCSV(dataset_svs_simple, f'./dataset/{data_dir}/Data_SimpleName_svs.csv')
+WriteDicCSV(count_sort, f'./dataset/{data_dir}/Disease_SimpleName_svs_list.csv')
 
 dataset_svs_full, count_sort = Add_Diseasae(dataset_svs, 'FullName')
-WriteMultiCSV(dataset_svs_full, f'{dir_list[add_option]}/Data_FullName_svs.csv')
-WriteDicCSV(count_sort, f'{dir_list[add_option]}/Disease_FullName_svs_list.csv')
+WriteMultiCSV(dataset_svs_full, f'./dataset/{data_dir}/Data_FullName_svs.csv')
+WriteDicCSV(count_sort, f'./dataset/{data_dir}/Disease_FullName_svs_list.csv')
 
 

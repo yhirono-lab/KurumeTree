@@ -8,13 +8,13 @@ def pm2unu(s):
     else:
         return 1
 
-def readCSV(dirpath, mode, unu_flag=True):
+def readCSV(data_option, mode, unu_flag=True):
     # 免疫染色のリスト mensen_list
     # 病名のリスト dis_list
     # 症例データ dlist
     # 症例番号と病名番号の対応付け dis_id
 
-    csv_data = open(f'{dirpath}/Data_{mode}Name.csv')
+    csv_data = open(f'./dataset/{data_option}/Data_{mode}Name.csv')
     reader = csv.reader(csv_data)
     
     for row in reader:
@@ -47,20 +47,20 @@ def readCSV(dirpath, mode, unu_flag=True):
 
     return np.array(unu_list), np.array(dis_id_list), np.array(stain_list), np.array(dis_list), np.array(dataset)
 
-def readCSV_svs(dirpath, mode, unu_flag=True):
+def readCSV_svs(data_option, mode, unu_flag=True):
     # 免疫染色のリスト mensen_list
     # 病名のリスト dis_list
     # 症例データ dlist
     # 症例番号と病名番号の対応付け dis_id
 
-    csv_data = open(f'{dirpath}/Kurume_img_list.txt')
+    csv_data = open(f'./Raw_data/{data_option}/Kurume_img_list.txt')
     reader = csv.reader(csv_data)
     svs_list = []
     for row in reader:
         svs_list.append(row[0])
     csv_data.close()
 
-    csv_data = open(f'{dirpath}/Data_{mode}Name.csv')
+    csv_data = open(f'./dataset/{data_option}/Data_{mode}Name.csv')
     reader = csv.reader(csv_data)
     
     for row in reader:
